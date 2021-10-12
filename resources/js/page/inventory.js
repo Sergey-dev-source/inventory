@@ -49,6 +49,7 @@ $(document).ready( function () {
                 render: function (data, type, full, metta) {
                     return `
                         <div class='more'>
+
                                     <div class='p_ic'>
                                         <i class='bx bx-dots-horizontal-rounded'></i>
                                     </div>
@@ -61,7 +62,7 @@ $(document).ready( function () {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href=" . route('product_edit', $row->id) . ">
+                                                <a href="/inventory/transfer/ ${full.id}">
                                                     <i class='bx bxs-ship'></i>
                                                      Location Transfer
                                                 </a>

@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function (){
     Route::post('/inventory/create', "InventoryController@create")->name('inventory.create');
     Route::get('/inventory/filter', "InventoryController@filter");
     Route::post('/inventory/change_count', "InventoryController@change_count");
+    Route::get('/inventory/transfer/{id}', "InventoryController@transfer");
+    Route::post('/inventory/transfer', "InventoryController@save_transfer")->name('inventory.save.transfer');
 });
 
 

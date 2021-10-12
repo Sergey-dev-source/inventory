@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\Warehouse;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,5 +74,40 @@ class InventoryController extends Controller
             return response()->json(['action' => 'success']);
         }
 
+    }
+
+    public function transfer($id) {
+        $inventory = Inventory::where('id',$id)->with('product')->with('warehouse')->first();
+        $data['inventory'] = $inventory;
+        $data['location'] = Warehouse::where('id','!=',$inventory['warehouse']['id'])->where('user_id' ,Auth::id())->get();
+       return view('inventory.transfer',$data);
+    }
+
+    public function save_transfer(Request $request) {
+        $request->validate([
+            'location_from'=>'required',
+            'location_to'=>'required',
+        ]);
+        $location_from = Inventory::where('warehouse_id',$request->location_from)->first();
+        $count = (integer)$request->qount;
+        if ($location_from['count'] < $count) {
+            return redirect()->back()->with(['error' => 'error count']);
+        }
+        $inventory_change = Inventory::where('warehouse_id', $request->location_from)
+            ->update([
+                'count' => DB::raw('count-' . $count),
+            ]);
+
+        if ($inventory_change) {
+            $inv = Inventory::create([
+                'user_id' => Auth::id(),
+                'count' => $count,
+                'product_id' => $request->product,
+                'warehouse_id' => $request->location_to,
+            ]);
+            if ($inv){
+                return redirect(route('inventory.index'))->with(['success' => 'Inventory product transfered successfully']);
+            }
+        }
     }
 }

@@ -564,8 +564,11 @@ body {
     color: white;
 }
 
+#error{
+    background-color: red!important;
+}
 
-#success{
+#success,#error{
     position: absolute;
     width: 280px;
     background: darkgreen;

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Models\currency;
 use App\Models\User;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,5 +33,12 @@ class UsersController extends Controller
        if ($user){
            return redirect()->back()->withSuccess('account created successfully');
        }
+    }
+
+    public function settings()
+    {
+        $data['currency'] = currency::all();
+        $data['zone'] = Zone::all();
+
     }
 }

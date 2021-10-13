@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function (){
     Route::post('/inventory/change_count', "InventoryController@change_count");
     Route::get('/inventory/transfer/{id}', "InventoryController@transfer");
     Route::post('/inventory/transfer', "InventoryController@save_transfer")->name('inventory.save.transfer');
+
+    Route::get('/users/settings', "UsersController@settings")->name('users.settings');
 });
 
 

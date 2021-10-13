@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../css/app.css">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    {{--    boxicons--}}
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -82,7 +81,7 @@
             <span class="tooltip">More...</span>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ route('users.settings') }}">
                 <i class='bx bx-cog'></i>
                 <span class="links_name">Settings</span>
             </a>

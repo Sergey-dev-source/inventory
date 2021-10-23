@@ -38,7 +38,25 @@ class UsersController extends Controller
     public function settings()
     {
         $data['currency'] = currency::all();
-        $data['zone'] = Zone::all();
 
+        $data['zone'] = Zone::all();
+        return view('user.settings',$data);
+    }
+
+    public function settings_post(Request $request)
+    {
+        $id = Auth::id();
+        $user = User::where('id',$id)->first();
+        if (!empty($request->currency_id)) {
+            $user->currency_id = $request->currency_id;
+        }
+        if (!empty($request->time_zone_id)) {
+            $user->time_zone_id = $request->time_zone_id;
+        }
+        $user->save();
+        if ($user)
+        {
+            return redirect()->back()->with(['success' => 'Settings updated successfully']);
+        }
     }
 }

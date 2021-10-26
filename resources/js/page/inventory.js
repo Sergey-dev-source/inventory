@@ -34,7 +34,7 @@ $(document).ready( function () {
                     } else {
                         color = 'bg-success';
                     }
-                    return `<div class="${color} text-white w-25 text-center p-2">${data}</div>`;
+                    return `<div class="${color} text-white  btn">${data}</div>`;
                 }
             },{
                 data: 'id',

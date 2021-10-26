@@ -6,6 +6,7 @@ use App\Http\Requests\Products;
 use App\Models\Bin;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
@@ -177,5 +178,18 @@ class ProductController extends Controller
         if ($product) {
             return redirect()->back()->with(['success' => 'Product ' . $pr->name . ' updated successfully']);
         }
+    }
+
+    public function delete($id) {
+        $i_product = Inventory::where('product_id',$id)->get();
+        if (count($i_product) > 0){
+            return redirect()->back()->with(['errors' => 'Product exist in warehouse']);
+        }else{
+            $delete = Product::where('id',$id)->delete();
+            if ($delete){
+                return redirect()->back()->with(['success' => 'Product deleted successfully']);
+            }
+        }
+
     }
 }

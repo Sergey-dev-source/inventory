@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function (){
     Route::post('/product/store', "ProductController@store")->name('product_store');
     Route::post('/product/image', "ProductController@image");
     Route::get('/product/view/{id}', "ProductController@view")->name('view');
+    Route::get('/product/delete/{id}', "ProductController@delete");
     Route::post('/category','CategoryController@create');
     Route::post('/bin','BinController@create');
     Route::post('/color','ColorController@create');

@@ -34,7 +34,7 @@ $(document).ready(function () {
           color = 'bg-success';
         }
 
-        return "<div class=\"".concat(color, " text-white w-25 text-center p-2\">").concat(data, "</div>");
+        return "<div class=\"".concat(color, " text-white  btn\">").concat(data, "</div>");
       }
     }, {
       data: 'id',

@@ -84,7 +84,7 @@ $(document).ready( function () {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href=''>
+                                                <a href='/product/delete/${data}'>
                                                     <i class='bx bx-trash' ></i>
                                                     Delete product
                                                 </a>

@@ -12,7 +12,7 @@
                 Product list
             </span>
             <span>
-                <a href="{{route('product_create')}}">
+                <a href="{{route('product_create')}}" class="btn btn-success ">
                     <i class='bx bx-plus'></i>
                     Add New product
                 </a>

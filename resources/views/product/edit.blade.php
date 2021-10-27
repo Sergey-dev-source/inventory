@@ -16,7 +16,7 @@
                     <i class='bx bxs-chevron-left'></i>
                     back
                 </button>
-                <a href="#" onclick="document.getElementById('upd').submit();">
+                <a href="#" onclick="document.getElementById('upd').submit();" class="btn btn-success ">
                     <i class='bx bx-chevron-down'></i>
                     save
                 </a>

@@ -50,7 +50,7 @@
             <span class="tooltip">Inventory</span>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ route('orders') }}">
                 <i class='bx bx-cart'></i>
                 <span class="links_name">Orders</span>
             </a>

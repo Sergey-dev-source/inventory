@@ -26,14 +26,18 @@ class ProductController extends Controller
     public function filter()
     {
         $product = Product::
-        select('products.*', DB::raw('categories.name as category'), DB::raw('bins.name as bin'), DB::raw('colors.name as color'), DB::raw('sizes.name as sizes'))
+        select('products.*',DB::raw('categories.name as category'), DB::raw('bins.name as bin'), DB::raw('colors.name as color'), DB::raw('sizes.name as sizes'),DB::raw('SUM(inventories.count) as inwentory'),DB::raw('COUNT(inventories.count) as inwentory_count'))
             ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('bins', 'bins.id', '=', 'products.bin_id')
             ->leftJoin('colors', 'colors.id', '=', 'products.color')
             ->leftJoin('sizes', 'sizes.id', '=', 'products.size')
+            ->leftJoin('inventories', 'inventories.product_id', '=', 'products.id')
+            ->groupBy('products.id')
             ->where('products.user_id', Auth::id())
+    
             ->orderBy('products.id', 'desc')
             ->get();
+
         return DataTables::of($product)
            ->make(true);
     }

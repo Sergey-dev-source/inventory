@@ -29,6 +29,7 @@
                     <th>Sku</th>
                     <th>Uom</th>
                     <th>Category</th>
+                    <th>Product Inventory</th>
                     <th>Actions</th>
                 </tr>
                 </thead>

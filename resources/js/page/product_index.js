@@ -1,20 +1,19 @@
 import axios from "axios";
 let upl_pr = document.querySelector('#upl_pr');
-if (upl_pr){
+if (upl_pr) {
     upl_pr.addEventListener('change', evt => {
         let id = evt.target.getAttribute('data-arg');
         let formData = new FormData();
         let imagefile = document.querySelector('#file');
-        formData.append("image",evt.target.files[0]);
-        formData.append("id",id);
-        axios.post('/product/image',formData,
-            {
+        formData.append("image", evt.target.files[0]);
+        formData.append("id", id);
+        axios.post('/product/image', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
             .then(response => {
-                if (response.data.action == 'success'){
+                if (response.data.action == 'success') {
                     let host = window.location.host;
                     document.querySelector('.product_image_body').innerHTML = `<img src="/images/product/${response.data.img}" >`;
                 }
@@ -22,25 +21,26 @@ if (upl_pr){
     })
 }
 
-$(document).ready( function () {
+$(document).ready(function() {
     $('#table').DataTable({
         processing: true,
         serverSide: true,
         ajax: '/product/filter',
 
-        columns: [
-            {
+        columns: [{
                 data: 'id',
                 name: 'id',
-                render: function( data, type, full, meta ) {
+                render: function(data, type, full, meta) {
                     return `<input type="checkbox" class="product_checkbox" value="${data}" /  >`
                 }
             },
-            { data: 'image', name: 'image',
-                render: function( data, type, full, meta ) {
-                    if (data !== ''){
+            {
+                data: 'image',
+                name: 'image',
+                render: function(data, type, full, meta) {
+                    if (data !== '') {
                         return "<img src=\"/images/product/" + data + "\" height=\"50\" width=\"50\" />";
-                    }else{
+                    } else {
                         return "<img src=\"/images/imagecomingsoon_4.jpg\" height=\"50\" width=\"50\" />";
                     }
                 }
@@ -62,9 +62,15 @@ $(document).ready( function () {
                 name: 'category'
             },
             {
+                data: 'inwentory',
+                name: 'inwentory',
+                render: function(data, type, full, meta) {
+                    return `<div>${(data !== null) ? data : '0'} in ${full.inwentory_count} location</div>`
+                }
+            }, {
                 data: 'id',
                 name: 'id',
-                render: function( data, type, full, meta ) {
+                render: function(data, type, full, meta) {
                     return `<div class='more'>
                                     <div class='p_ic'>
                                         <i class='bx bx-dots-horizontal-rounded'></i>
@@ -97,4 +103,4 @@ $(document).ready( function () {
 
         ]
     });
-} );
+});

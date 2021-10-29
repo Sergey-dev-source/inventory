@@ -10,10 +10,7 @@ Route::middleware('CheckLogin')->group(function (){
     Route::post('/register',"UsersController@register_form")->name('register_form');
 });
 Route::middleware('auth')->group(function (){
-    Route::get('/logout', function (){
-        \Illuminate\Support\Facades\Auth::logout();
-        return redirect('/');
-    })->name('logout');
+    Route::get('/logout','UsersController@logout')->name('logout');
     Route::get('/dashboard', "DashboardController@index")->name('dashboard');
     Route::get('/product', "ProductController@index")->name('product');
     Route::get('/product/create', "ProductController@create")->name('product_create');

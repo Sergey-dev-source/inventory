@@ -59,4 +59,9 @@ class UsersController extends Controller
             return redirect()->back()->with(['success' => 'Settings updated successfully']);
         }
     }
+
+    public function logout() {
+        Auth::logout();
+        return redirect('/');
+    }
 }

@@ -2397,7 +2397,7 @@ $(document).ready(function () {
       data: 'inwentory',
       name: 'inwentory',
       render: function render(data, type, full, meta) {
-        return "<div>".concat(data !== null ? data : '0', " in ").concat(full.inwentory_count, " location</div>");
+        return "<div><a href=\"/inventory?id=".concat(full.id, "\">").concat(data !== null ? data : '0', " in ").concat(full.inwentory_count, " location</a></div>");
       }
     }, {
       data: 'id',

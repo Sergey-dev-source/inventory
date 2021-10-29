@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div class="content">
         <div class="content_header">
             <span>
@@ -84,6 +85,9 @@
 
 @endsection
 @section('scripts')
+    <script>
+        let id = {{ (isset($id)) ? $id : 0 }};
+    </script>
     <script src="{{ asset('js/page/inventory.js') }}"></script>
 @endsection
 

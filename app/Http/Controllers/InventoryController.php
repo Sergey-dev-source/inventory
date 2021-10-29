@@ -9,12 +9,17 @@ use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 use Yajra\DataTables\DataTables;
 
 class InventoryController extends Controller
 {
     public function index()
     {
+
+        if (isset($_GET['id'])) {
+            $data['id'] = $_GET['id'];
+        }
         $data['product'] = Product::where('user_id', Auth::id())->get();
         $data['location'] = Warehouse::where('user_id', Auth::id())->get();
 
@@ -57,7 +62,12 @@ class InventoryController extends Controller
 
     public function filter()
     {
-        $inventory = Inventory::where('user_id', Auth::id())->with('product')->with('warehouse')->get();
+        $where = [];
+        if (isset($_GET['id'])){
+            $where['product_id'] =  (int)$_GET['id'];
+        }
+        $where['user_id'] =  Auth::id();
+        $inventory = Inventory::where($where)->with('product')->with('warehouse')->get();
 
         return DataTables::of($inventory)
             ->make(true);

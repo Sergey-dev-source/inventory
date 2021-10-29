@@ -4,10 +4,18 @@ var __webpack_exports__ = {};
   !*** ./resources/js/page/inventory.js ***!
   \****************************************/
 $(document).ready(function () {
+  var url = '';
+
+  if (id === 0) {
+    url = '/inventory/filter';
+  } else {
+    url = "/inventory/filter?id=".concat(id);
+  }
+
   $('#table').DataTable({
     processing: true,
     serverSide: true,
-    ajax: '/inventory/filter',
+    ajax: url,
     columns: [{
       data: 'id',
       name: 'id'

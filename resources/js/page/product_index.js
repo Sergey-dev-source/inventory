@@ -65,7 +65,7 @@ $(document).ready(function() {
                 data: 'inwentory',
                 name: 'inwentory',
                 render: function(data, type, full, meta) {
-                    return `<div>${(data !== null) ? data : '0'} in ${full.inwentory_count} location</div>`
+                    return `<div><a href="/inventory?id=${full.id}">${(data !== null) ? data : '0'} in ${full.inwentory_count} location</a></div>`
                 }
             }, {
                 data: 'id',

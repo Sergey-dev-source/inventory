@@ -1,9 +1,15 @@
 
 $(document).ready( function () {
+    let url = '';
+    if (id === 0){
+         url =  '/inventory/filter';
+    }else {
+        url =  `/inventory/filter?id=${id}`
+    }
     $('#table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '/inventory/filter',
+        ajax: url,
 
         columns: [
             {

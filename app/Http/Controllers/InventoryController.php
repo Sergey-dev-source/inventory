@@ -9,6 +9,7 @@ use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 use Symfony\Component\Console\Input\Input;
 use Yajra\DataTables\DataTables;
 
@@ -84,6 +85,21 @@ class InventoryController extends Controller
             return response()->json(['action' => 'success']);
         }
 
+    }
+
+    public function counts(Request $request) {
+        $count = $request->value;
+        if (!is_numeric($count) ){
+            return response()->json(['action' => 'error','message'=>'Count not numeric']);
+        }
+        $inventory = Inventory::where('id', $request->id)
+            ->update([
+                'count' => $count
+            ]);
+
+        if ($inventory) {
+            return response()->json(['action' => 'success','message'=>'Count changed successful']);
+        }
     }
 
     public function transfer($id) {

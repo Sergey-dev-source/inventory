@@ -9,7 +9,7 @@
         <div class="content_header">
             <span>
                 <i class='bx bx-barcode-reader'></i>
-               Create product
+                Add New  Order
             </span>
             <span class="boxes">
                 <button type="button" class="btn btn-success" onclick="history.back();">
@@ -22,16 +22,22 @@
                 </a>
             </span>
         </div>
-        <div class="content_body">
-            <div>
-                <form action="{{ route('product_store') }}" method="post" enctype="multipart/form-data" id="form">
-                    @csrf
-                   
-
-                   
-                </form>
+        <form action="{{ route('product_store') }}" method="post" enctype="multipart/form-data" id="form">
+            @csrf 
+            <div class="container-fluid" style="box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 22%);">
+                <div class="row">
+                    <div class="" style='padding: 0'>
+                        <div class="w-100 pt-2 pb-2 bg-secondary">
+                            <h3></h3>
+                        </div>
+                    </div>
+                    <div class="" style='padding: 0'>
+                        <div class="w-100 pt-2 pb-2 bg-info"></div>
+                    </div>                 
+                
+                </div>  
             </div>
-        </div>
+        </form>
     </div>
 @endsection
 @section('abs')
@@ -65,23 +71,8 @@
         </div>
     @endif
 
-    <div class="crete" id="size">
-        <div class="crete_rel">
-            <button type="button" class="close" onclick="document.getElementById('size').style.display = 'none'">
-                <i class='bx bx-x'></i>
-            </button>
-            <div class="create_header">
-                Create New size
-            </div>
-            <div class="create_form_input">
-                <label>name</label>
-                <input type="number" class="size_name">
-            </div>
-            <button type="button" id="submit_size">Create</button>
-        </div>
-    </div>
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/page/product.js') }}"></script>
+    
 @endsection

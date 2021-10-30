@@ -22,25 +22,75 @@
                 </a>
             </span>
         </div>
-        <form action="{{ route('product_store') }}" method="post" enctype="multipart/form-data" id="form">
-            @csrf 
-            <div class="container-fluid" style="box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 22%);">
-                <div class="row">
-                    <div class="" style='padding: 0'>
+        <div class="content_body">
+            <form action="{{ route('product_store') }}" method="post" enctype="multipart/form-data" id="form">
+                @csrf 
+                <div class="d-flex justify-content-around ">
+                    <div class="" style='padding: 0;width: 49%; box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 22%);'>
                         <div class="w-100 pt-2 pb-2 bg-secondary">
-                            <h3></h3>
+                            <span class="text-white p-3">
+                                <i class='bx bx-cog'></i>
+                                Order details
+                            </span>
+                        </div>
+                        <div class="p-3 w-75">
+                            <div class="form-group">
+                                <label for="reference">Reference Order:</label>
+                                <input type="text" id="reference" name="reference" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="additional">Additional Reference Order:</label>
+                                <input type="text" id="reference" name="additional" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="channel">Sales channel</label>
+                                <select name="channel" id="channel" class="form-control">
+                                    <option value="">Select channel</option>
+                                </select>
+                                <div>
+                                    <button type="button" class="btn btn-success" style="font-size: 10px" data-toggle="modal" data-target="#create_channel">
+                                        Create Channel
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="" style='padding: 0'>
-                        <div class="w-100 pt-2 pb-2 bg-info"></div>
+
+                    <div class="" style='padding: 0;width: 49%; box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 22%);'>
+                        <div class="w-100 pt-2 pb-2 bg-secondary">
+                            <span class="text-white p-3">
+                                <i class='bx bxs-truck'></i>
+                                Shipping Address
+                            </span>
+                        </div>
                     </div>                 
                 
                 </div>  
-            </div>
-        </form>
+            
+            </form>
+        </div>
     </div>
 @endsection
 @section('abs')
+<div class="modal fade" id="create_channel" tabindex="-1" role="dialog" aria-labelledby="create_channelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="create_channelLabel">Create sale channel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
     @if($errors->any())
         <div id="error">
             <div class="warn_icon">

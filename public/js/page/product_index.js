@@ -2383,7 +2383,10 @@ $(document).ready(function () {
       }
     }, {
       data: 'name',
-      name: 'name'
+      name: 'name',
+      render: function render(data, type, full, meta) {
+        return "<a href=\"/product/view/".concat(full.id, "\">").concat(data, "</a>");
+      }
     }, {
       data: 'sku',
       name: 'sku'

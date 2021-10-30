@@ -47,7 +47,10 @@ $(document).ready(function() {
             },
             {
                 data: 'name',
-                name: 'name'
+                name: 'name',
+                render: function(data, type, full, meta) {
+                    return `<a href="/product/view/${full.id}">${data}</a>`
+                }
             },
             {
                 data: 'sku',

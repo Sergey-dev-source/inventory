@@ -46,6 +46,11 @@
                                 <label for="channel">Sales channel</label>
                                 <select name="channel" id="channel" class="form-control">
                                     <option value="">Select channel</option>
+                                    @if (!empty($channel))
+                                        @foreach ($channel as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach                                        
+                                    @endif
                                 </select>
                                 <div>
                                     <button type="button" class="btn btn-success" style="font-size: 10px" data-toggle="modal" data-target="#create_channel">
@@ -82,11 +87,18 @@
           </button>
         </div>
         <div class="modal-body">
-            
+            <div class="form-group">
+                <label for="chanal_name">Name</label>
+                <input type="text" id="chanal_name" name="chanal_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="chanal_description">Description:</label>
+                <input type="text" id="chanal_description" name="chanal_description" class="form-control">
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" id="save_channel">Save </button>
         </div>
       </div>
     </div>
@@ -124,5 +136,5 @@
 @endsection
 
 @section('scripts')
-    
+    <script src="{{ asset('js/page/order.js') }}"></script>
 @endsection

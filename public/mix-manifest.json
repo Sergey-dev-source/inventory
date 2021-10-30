@@ -4,5 +4,6 @@
     "/js/page/product_index.js": "/js/page/product_index.js",
     "/js/page/inventory.js": "/js/page/inventory.js",
     "/js/page/inventory_ajax.js": "/js/page/inventory_ajax.js",
+    "/js/page/order.js": "/js/page/order.js",
     "/css/app.css": "/css/app.css"
 }

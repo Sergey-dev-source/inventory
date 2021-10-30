@@ -16,6 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/page/product_index.js', 'public/js/page')
     .js('resources/js/page/inventory.js', 'public/js/page')
     .js('resources/js/page/inventory_ajax.js', 'public/js/page')
+    .js('resources/js/page/order.js', 'public/js/page')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);

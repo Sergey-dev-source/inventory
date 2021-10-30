@@ -26,7 +26,6 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: '/product/filter',
-
         columns: [{
                 data: 'id',
                 name: 'id',

@@ -2455,7 +2455,10 @@ $(document).ready(function () {
       name: 'name'
     }, {
       data: 'status',
-      name: 'status'
+      name: 'status',
+      render: function render(data, type, fuel, metta) {
+        return "<input type=\"checkbox\" ".concat(data === 1 ? 'checked' : '', "  data-toggle=\"toggle\"  data-size=\"xs\" />");
+      }
     }, {
       data: 'id',
       name: 'id',

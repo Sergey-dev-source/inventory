@@ -32,4 +32,9 @@ class WarehouseController extends Controller
             return redirect()->back()->with(['success' => 'Location ' . $request->name . ' crated successfully']);
         }
     }
+
+    public function edit($id) {
+        $data['warehouse'] = Warehouse::where('id',$id)->first();
+        return view('warehouse.edit',$data);
+    }
 }

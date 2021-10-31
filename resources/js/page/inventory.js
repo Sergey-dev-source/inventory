@@ -164,6 +164,7 @@ $(document).ready(function() {
     $('#locations').DataTable({
         processing: true,
         serverSide: true,
+
         ajax: '/location/filter',
         columns: [{
                 data: 'name',
@@ -172,6 +173,9 @@ $(document).ready(function() {
             {
                 data: 'status',
                 name: 'status',
+                render: function(data, type, fuel, metta) {
+                    return `<input type="checkbox" ${(data === 1) ? 'checked' : '' }  data-toggle="toggle"  data-size="xs" />`
+                }
             },
             {
                 data: 'id',

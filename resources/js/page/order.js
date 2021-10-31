@@ -20,3 +20,24 @@ save_channel.addEventListener('click', () => {
 
         })
 })
+
+$(function() {
+    $('#countries').on('change', function() {
+        let val = $(this).find(":selected").val();
+        $('#state').children().remove();
+        if (val === '1') {
+            axios.get('/order/state')
+                .then((response) => {
+                    $('#state').append('<option value="">Select State (US Only):</option>');
+                    response.data.forEach(element => {
+                        $('#state').append(`<option value="${element.id}">${element.name}</option>`);
+                    });
+                })
+            $('.province').hide();
+            $('.state').show();
+        } else {
+            $('.province').show();
+            $('.state').hide();
+        }
+    })
+})

@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/product/filter', "ProductController@filter")->name('filter');
     Route::get('/inventory', "InventoryController@index")->name('inventory.index');
     Route::post('/location/create', "WarehouseController@create")->name('location.create');
+    Route::get('/location', "WarehouseController@index")->name('location.index');
+    Route::get('/location/filter', "WarehouseController@filter");
     Route::post('/inventory/create', "InventoryController@create")->name('inventory.create');
     Route::get('/inventory/filter', "InventoryController@filter");
     Route::post('/inventory/change_count', "InventoryController@change_count");
@@ -38,4 +40,5 @@ Route::middleware('auth')->group(function (){
     Route::get('/order',"OrdersController@index")->name('orders');
     Route::get('/orders/create',"OrdersController@create")->name('orders.create');
     Route::post('/channel/create',"ChannelController@create");
+    Route::get('/order/state',"OrdersController@state");
 });

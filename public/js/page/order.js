@@ -2355,6 +2355,26 @@ save_channel.addEventListener('click', function () {
     }
   });
 });
+$(function () {
+  $('#countries').on('change', function () {
+    var val = $(this).find(":selected").val();
+    $('#state').children().remove();
+
+    if (val === '1') {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/order/state').then(function (response) {
+        $('#state').append('<option value="">Select State (US Only):</option>');
+        response.data.forEach(function (element) {
+          $('#state').append("<option value=\"".concat(element.id, "\">").concat(element.name, "</option>"));
+        });
+      });
+      $('.province').hide();
+      $('.state').show();
+    } else {
+      $('.province').show();
+      $('.state').hide();
+    }
+  });
+});
 })();
 
 /******/ })()

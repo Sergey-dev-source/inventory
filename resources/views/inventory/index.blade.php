@@ -51,7 +51,7 @@
                          aria-expanded="false" aria-controls="collapseExample">
                        <i class='bx bx-dots-horizontal-rounded'></i>
                 </button>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse" id="collapseExample" style="z-index: 9999">
                     <div class="list-group">
                         <button type="button" class="list-group-item list-group-item-action" data-toggle="modal"
                                 data-target="#exampleModal1">
@@ -59,6 +59,11 @@
                             Add Invetory Product
                         </button>
 
+                    
+                        <a href="{{ route('location.index') }}" class="list-group-item list-group-item-action">
+                            <i class='bx bx-at'></i>
+                            Manage Locations
+                        </a>
                     </div>
                 </div>
             </span>

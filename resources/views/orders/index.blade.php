@@ -5,7 +5,7 @@
 @section('content')
 <div class="content">
     <div class="content_header">
-        <span>
+        <span class="text-white">
             <i class='bx bxs-cart'></i> 
             Order list
         </span>

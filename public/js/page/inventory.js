@@ -2446,6 +2446,24 @@ $(document).ready(function () {
       });
     }
   });
+  $('#locations').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: '/location/filter',
+    columns: [{
+      data: 'name',
+      name: 'name'
+    }, {
+      data: 'status',
+      name: 'status'
+    }, {
+      data: 'id',
+      name: 'id',
+      render: function render(data, type, full, metta) {
+        return "\n                        <div class='more'>\n                                    <div class='p_ic'>\n                                        <i class='bx bx-dots-horizontal-rounded'></i>\n                                    </div>\n                                    <div class='p_abs'>\n                                        <ul>\n                                            <li>\n                                                <a href='/location/edit/".concat(data, "'>\n                                                <i class='bx bx-edit'></i>\n                                                    Edit\n                                                </a>\n                                            </li>\n                                            <li>\n                                                <a href=\"/inventory/transfer/ ").concat(full.id, "\">\n                                                <i class='bx bx-trash' ></i>\n                                                Delete \n                                                </a>\n                                            </li>\n                                            <li>\n                                                <a href=''>\n                                                    <i class='bx bx-globe' ></i>\n                                                   Address\n                                                </a>\n                                            </li>\n                                        </ul>\n                                    </div>\n                                </div>\n                    ");
+      }
+    }]
+  });
 });
 })();
 

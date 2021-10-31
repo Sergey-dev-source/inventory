@@ -1,19 +1,18 @@
 import axios from "axios";
 
-$(document).ready( function () {
+$(document).ready(function() {
     let url = '';
-    if (id === 0){
-         url =  '/inventory/filter';
-    }else {
-        url =  `/inventory/filter?id=${id}`
+    if (id === 0) {
+        url = '/inventory/filter';
+    } else {
+        url = `/inventory/filter?id=${id}`
     }
     $('#table').DataTable({
         processing: true,
         serverSide: true,
         ajax: url,
 
-        columns: [
-            {
+        columns: [{
                 data: 'id',
                 name: 'id',
             },
@@ -32,28 +31,28 @@ $(document).ready( function () {
             {
                 data: 'count',
                 name: 'count',
-                render: function( data, type, full, meta ) {
+                render: function(data, type, full, meta) {
                     let color = '';
                     if (data <= 30) {
                         color = 'bg-danger';
                     } else if (data <= 60) {
-                            color = 'bg-warning';
+                        color = 'bg-warning';
                     } else {
                         color = 'bg-success';
                     }
                     return `<input type="text" data-arg="${full.id}"  class="${color} text-white  btn coun" value="${data}" >`;
                 }
-            },{
+            }, {
                 data: 'id',
                 name: 'id',
-                render: function (data, type, full, meta) {
+                render: function(data, type, full, meta) {
                     return `<button type="button" data-arg="${data}" value="1" class="btn btn-success text-white" onclick="ed(this)">+1</button>
                             <button type="button" data-arg="${data}" value="-1" class="btn btn-danger text-white mi" onclick="ed(this)">-1</button>`
                 }
-            },{
+            }, {
                 data: 'product.id',
                 name: 'product.id',
-                render: function (data, type, full, metta) {
+                render: function(data, type, full, metta) {
                     return `
                         <div class='more'>
                                     <div class='p_ic'>
@@ -88,23 +87,23 @@ $(document).ready( function () {
         ]
     });
     let c = '';
-    $('#table').on('focus','input',function (e) {
+    $('#table').on('focus', 'input', function(e) {
         c = e.target.value;
         e.target.value = '';
     })
-    $('#table').on('blur','input',function (e) {
+    $('#table').on('blur', 'input', function(e) {
         e.target.value = c;
     })
-    $('#table').on('keypress','input',function (e) {
-        if (e.which === 13){
+    $('#table').on('keypress', 'input', function(e) {
+        if (e.which === 13) {
             let id = e.target.getAttribute('data-arg');
             let value = e.target.value;
-            axios.post('/inventory/counts',{
-                id: id,
-                value: value
-            })
-                .then(response=> {
-                    if (response.data.action === 'error'){
+            axios.post('/inventory/counts', {
+                    id: id,
+                    value: value
+                })
+                .then(response => {
+                    if (response.data.action === 'error') {
                         e.target.blur();
                         $('body').append(`
                              <div id="error">
@@ -119,10 +118,10 @@ $(document).ready( function () {
                                 </div>
                             </div>
                         `)
-                        setTimeout(()=> {
+                        setTimeout(() => {
                             document.getElementById('error').remove();
-                        },4000);
-                    }else if(response.data.action === 'success'){
+                        }, 4000);
+                    } else if (response.data.action === 'success') {
                         let color = '';
                         if (value <= 30) {
                             color = 'bg-danger';
@@ -131,17 +130,17 @@ $(document).ready( function () {
                         } else {
                             color = 'bg-success';
                         }
-                        if(e.target.classList.contains('bg-success') === true){
+                        if (e.target.classList.contains('bg-success') === true) {
                             e.target.classList.remove('bg-success');
-                        }else if(e.target.classList.contains('bg-warning') === true) {
+                        } else if (e.target.classList.contains('bg-warning') === true) {
                             e.target.classList.remove('bg-warning');
-                        }else if(e.target.classList.contains('bg-danger') === true) {
+                        } else if (e.target.classList.contains('bg-danger') === true) {
                             e.target.classList.remove('bg-danger');
                         }
                         e.target.classList.add(color)
                         c = value;
                         e.target.blur();
-                            $('body').append(`
+                        $('body').append(`
                              <div id="success">
                                 <div class="warn_icon">
                                     <i class='bx bx-check-double'></i>
@@ -154,11 +153,61 @@ $(document).ready( function () {
                                 </div>
                             </div>
                         `)
-                        setTimeout(()=> {
+                        setTimeout(() => {
                             document.getElementById('success').remove();
-                        },4000);
+                        }, 4000);
                     }
-                } )
+                })
         }
     })
-} );
+
+    $('#locations').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '/location/filter',
+        columns: [{
+                data: 'name',
+                name: 'name',
+            },
+            {
+                data: 'status',
+                name: 'status',
+            },
+            {
+                data: 'id',
+                name: 'id',
+                render: function(data, type, full, metta) {
+                    return `
+                        <div class='more'>
+                                    <div class='p_ic'>
+                                        <i class='bx bx-dots-horizontal-rounded'></i>
+                                    </div>
+                                    <div class='p_abs'>
+                                        <ul>
+                                            <li>
+                                                <a href='/location/edit/${data}'>
+                                                <i class='bx bx-edit'></i>
+                                                    Edit
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/inventory/transfer/ ${full.id}">
+                                                <i class='bx bx-trash' ></i>
+                                                Delete 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href=''>
+                                                    <i class='bx bx-globe' ></i>
+                                                   Address
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                    `
+                }
+            }
+        ]
+    })
+});

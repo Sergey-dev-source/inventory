@@ -23,8 +23,9 @@
             </span>
         </div>
         <div class="content_body">
-            <form action="" method="post" id="warehouse">
+            <form action="{{ route('location.update') }}" method="post" id="warehouse">
                 @csrf 
+                <input type="hidden" id="id" name="id" value="{{ $warehouse['id'] }}" class="form-control">
                 <div class="">
                     <div class="" style='padding: 0;width: 49%; box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 22%);'>
                         <div class="w-100 pt-2 pb-2 bg-secondary">
@@ -40,7 +41,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="status">Status:</label>
-                                <input type="checkbox" id="status" {{ ($warehouse['status'] === 1) ? "checked" : "" }} name="status" >
+                                <input type="checkbox" id="status" {{ ($warehouse['status'] === 1) ? "checked" : "" }} name="status" value="1">
                             </div>
                         </div>
                     </div>            

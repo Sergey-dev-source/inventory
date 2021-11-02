@@ -37,4 +37,21 @@ class WarehouseController extends Controller
         $data['warehouse'] = Warehouse::where('id',$id)->first();
         return view('warehouse.edit',$data);
     }
+    
+    public function change_status(Request $request){
+        $warehouse = Warehouse::where('id',$request->id)->update(['status' => $request->status]);
+        if ($warehouse){
+            return response()->json(['action'=>'success']);
+        }
+    }
+
+    public function update(Request $request){
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $warehouse = Warehouse::where('id',$request->id)->update(['status' => $request->status,'name' => $request->name]);
+        if ($warehouse){
+            return redirect()->back()->with(['success' => 'Location ' . $request->name . ' updatet successfully']);
+        }
+    }
 }

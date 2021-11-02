@@ -2457,7 +2457,7 @@ $(document).ready(function () {
       data: 'status',
       name: 'status',
       render: function render(data, type, fuel, metta) {
-        return "<input type=\"checkbox\" ".concat(data === 1 ? 'checked' : '', "  data-toggle=\"toggle\"  data-size=\"xs\" />");
+        return "<input type=\"checkbox\" ".concat(data === 1 ? 'checked' : '', " onchenge='status_change(this)' data-id=\"").concat(fuel.id, "\" class=\"status_change\" value='1' />");
       }
     }, {
       data: 'id',
@@ -2466,6 +2466,19 @@ $(document).ready(function () {
         return "\n                        <div class='more'>\n                                    <div class='p_ic'>\n                                        <i class='bx bx-dots-horizontal-rounded'></i>\n                                    </div>\n                                    <div class='p_abs'>\n                                        <ul>\n                                            <li>\n                                                <a href='/location/edit/".concat(data, "'>\n                                                <i class='bx bx-edit'></i>\n                                                    Edit\n                                                </a>\n                                            </li>\n                                            <li>\n                                                <a href=\"/inventory/transfer/ ").concat(full.id, "\">\n                                                <i class='bx bx-trash' ></i>\n                                                Delete \n                                                </a>\n                                            </li>\n                                            <li>\n                                                <a href=''>\n                                                    <i class='bx bx-globe' ></i>\n                                                   Address\n                                                </a>\n                                            </li>\n                                        </ul>\n                                    </div>\n                                </div>\n                    ");
       }
     }]
+  });
+  $('#locations').on('change', '.status_change', function (e) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/location/change_status', {
+      status: e.target.checked,
+      id: e.target.getAttribute('data-id')
+    }).then(function (response) {
+      if (response.data.action === 'success') {
+        $('body').append("\n                             <div id=\"success\">\n                                <div class=\"warn_icon\">\n                                    <i class='bx bx-check-double'></i>\n                                </div>\n                                <div class=\"warn_text\">\n                                    <div>Status updatet succesfuly</div>\n                                </div>\n                                <div class=\"warn_close\" onclick=\"document.getElementById('success').remove()\" >\n                                    <i class='bx bx-x'></i>\n                                </div>\n                            </div>\n                        ");
+        setTimeout(function () {
+          document.getElementById('success').remove();
+        }, 4000);
+      }
+    });
   });
 });
 })();

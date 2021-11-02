@@ -174,7 +174,7 @@ $(document).ready(function() {
                 data: 'status',
                 name: 'status',
                 render: function(data, type, fuel, metta) {
-                    return `<input type="checkbox" ${(data === 1) ? 'checked' : '' }  data-toggle="toggle"  data-size="xs" />`
+                    return `<input type="checkbox" ${(data === 1) ? 'checked' : '' } onchenge='status_change(this)' data-id="${fuel.id}" class="status_change" value='1' />`
                 }
             },
             {
@@ -213,5 +213,29 @@ $(document).ready(function() {
                 }
             }
         ]
+    })
+
+    $('#locations').on('change', '.status_change', function(e) {
+        axios.post('/location/change_status', { status: e.target.checked, id: e.target.getAttribute('data-id') })
+            .then((response) => {
+                if (response.data.action === 'success') {
+                    $('body').append(`
+                             <div id="success">
+                                <div class="warn_icon">
+                                    <i class='bx bx-check-double'></i>
+                                </div>
+                                <div class="warn_text">
+                                    <div>Status updatet succesfuly</div>
+                                </div>
+                                <div class="warn_close" onclick="document.getElementById('success').remove()" >
+                                    <i class='bx bx-x'></i>
+                                </div>
+                            </div>
+                        `)
+                    setTimeout(() => {
+                        document.getElementById('success').remove();
+                    }, 4000);
+                }
+            })
     })
 });

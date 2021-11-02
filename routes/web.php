@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function (){
     Route::get('/location', "WarehouseController@index")->name('location.index');
     Route::get('/location/filter', "WarehouseController@filter");
     Route::get('/location/edit/{id}', "WarehouseController@edit");
+    Route::post('/location/update', "WarehouseController@update")->name('location.update');
+    Route::post('/location/change_status', "WarehouseController@change_status");
     Route::post('/inventory/create', "InventoryController@create")->name('inventory.create');
     Route::get('/inventory/filter', "InventoryController@filter");
     Route::post('/inventory/change_count', "InventoryController@change_count");

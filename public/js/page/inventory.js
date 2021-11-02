@@ -2463,7 +2463,7 @@ $(document).ready(function () {
       data: 'id',
       name: 'id',
       render: function render(data, type, full, metta) {
-        return "\n                        <div class='more'>\n                                    <div class='p_ic'>\n                                        <i class='bx bx-dots-horizontal-rounded'></i>\n                                    </div>\n                                    <div class='p_abs'>\n                                        <ul>\n                                            <li>\n                                                <a href='/location/edit/".concat(data, "'>\n                                                <i class='bx bx-edit'></i>\n                                                    Edit\n                                                </a>\n                                            </li>\n                                            <li>\n                                                <a href=\"/inventory/transfer/ ").concat(full.id, "\">\n                                                <i class='bx bx-trash' ></i>\n                                                Delete \n                                                </a>\n                                            </li>\n                                            <li>\n                                                <a href=''>\n                                                    <i class='bx bx-globe' ></i>\n                                                   Address\n                                                </a>\n                                            </li>\n                                        </ul>\n                                    </div>\n                                </div>\n                    ");
+        return "\n                        <div class='more'>\n                                    <div class='p_ic'>\n                                        <i class='bx bx-dots-horizontal-rounded'></i>\n                                    </div>\n                                    <div class='p_abs'>\n                                        <ul>\n                                            <li>\n                                                <a href='/location/edit/".concat(data, "'>\n                                                <i class='bx bx-edit'></i>\n                                                    Edit\n                                                </a>\n                                            </li>\n                                            <li>\n                                                <a data-id = \"").concat(full.id, "\" class=\"delete_location\">\n                                                    <i class='bx bx-trash' ></i>\n                                                    Delete \n                                                </a>\n                                            </li>\n                                            <li>\n                                                <a href=''>\n                                                    <i class='bx bx-globe' ></i>\n                                                   Address\n                                                </a>\n                                            </li>\n                                        </ul>\n                                    </div>\n                                </div>\n                    ");
       }
     }]
   });
@@ -2476,6 +2476,21 @@ $(document).ready(function () {
         $('body').append("\n                             <div id=\"success\">\n                                <div class=\"warn_icon\">\n                                    <i class='bx bx-check-double'></i>\n                                </div>\n                                <div class=\"warn_text\">\n                                    <div>Status updatet succesfuly</div>\n                                </div>\n                                <div class=\"warn_close\" onclick=\"document.getElementById('success').remove()\" >\n                                    <i class='bx bx-x'></i>\n                                </div>\n                            </div>\n                        ");
         setTimeout(function () {
           document.getElementById('success').remove();
+        }, 4000);
+      }
+    });
+  });
+  $('#locations').on('click', '.delete_location', function (e) {
+    console.log(e.target.getAttribute('data-id'));
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/location/delete', {
+      id: e.target.getAttribute('data-id')
+    }).then(function (response) {
+      if (response.data.action === 'success') {
+        window.location.reload();
+      } else {
+        $('body').append("\n                             <div id=\"error\">\n                                <div class=\"warn_icon\">\n                                    <i class='bx bx-error-alt'></i>\n                                </div>\n                                <div class=\"warn_text\">\n                                    <div>".concat(response.data.message, "</div>\n                                </div>\n                                <div class=\"warn_close\" onclick=\"document.getElementById('success').remove()\" >\n                                    <i class='bx bx-x'></i>\n                                </div>\n                            </div>\n                        "));
+        setTimeout(function () {
+          document.getElementById('error').remove();
         }, 4000);
       }
     });

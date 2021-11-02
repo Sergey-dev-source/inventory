@@ -195,9 +195,9 @@ $(document).ready(function() {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/inventory/transfer/ ${full.id}">
-                                                <i class='bx bx-trash' ></i>
-                                                Delete 
+                                                <a data-id = "${full.id}" class="delete_location">
+                                                    <i class='bx bx-trash' ></i>
+                                                    Delete 
                                                 </a>
                                             </li>
                                             <li>
@@ -234,6 +234,33 @@ $(document).ready(function() {
                         `)
                     setTimeout(() => {
                         document.getElementById('success').remove();
+                    }, 4000);
+                }
+            })
+    })
+
+    $('#locations').on('click', '.delete_location', function(e) {
+        console.log(e.target.getAttribute('data-id'));
+        axios.post('/location/delete', { id: e.target.getAttribute('data-id') })
+            .then((response) => {
+                if (response.data.action === 'success') {
+                    window.location.reload()
+                } else {
+                    $('body').append(`
+                             <div id="error">
+                                <div class="warn_icon">
+                                    <i class='bx bx-error-alt'></i>
+                                </div>
+                                <div class="warn_text">
+                                    <div>${response.data.message}</div>
+                                </div>
+                                <div class="warn_close" onclick="document.getElementById('success').remove()" >
+                                    <i class='bx bx-x'></i>
+                                </div>
+                            </div>
+                        `)
+                    setTimeout(() => {
+                        document.getElementById('error').remove();
                     }, 4000);
                 }
             })

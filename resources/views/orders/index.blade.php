@@ -17,6 +17,7 @@
         </span>
     </div>
     <div class="content_body">
+        
     </div>
 </div>
 @endsection

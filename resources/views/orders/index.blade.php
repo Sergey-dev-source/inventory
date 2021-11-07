@@ -16,7 +16,22 @@
             </a>
         </span>
     </div>
-    <div class="content_body">
+    <div class="content_body" style="padding: 5px">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="p-5">
+                        <label>Filter by: </label>
+                        <select class="custom-select" style="width: 50%" id="filter_channal">
+                            <option value="">Select channel</option>
+                            @foreach ($channel as $item)
+                                <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
         <table  class="table text-center" >
             <thead>
                 <thead >

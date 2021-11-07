@@ -2,24 +2,25 @@ import axios from "axios";
 
 let sort = 'id';
 let sort_i = 'ASC';
+let channels_id = '';
+
 let getOrder = () => {
     let url = `/order/getOrder?sort=${sort}&sort_i=${sort_i}`;
-
+    if (channels_id !== '') {
+        url = url + `&channels_id=${channels_id}`
+    }
     axios.get(url)
 
     .then((r) => {
-            console.log(r)
-            setOrder(r.data);
-        })
-        .catch((error) => {
-            // console.log(error)
-        })
+        setOrder(r.data);
+    })
 }
 
 let setOrder = data => {
     let element = '';
-    data.forEach(item => {
-        element += `
+    if (data.length > 0) {
+        data.forEach(item => {
+            element += `
         <tr>
             <td class="border">
                 ${item.id}
@@ -41,8 +42,18 @@ let setOrder = data => {
             </td>
         </tr>
         `
-        document.querySelector('#order').innerHTML = element;
-    });
+
+        });
+    } else {
+        element = `
+        <tr>
+            <td colspan = '6' class="border">
+                nout result 
+            </td>
+        </tr>
+        `
+    }
+    document.querySelector('#order').innerHTML = element;
 }
 
 document.querySelectorAll('.ord').forEach(item => {
@@ -59,5 +70,10 @@ let orderSort = e => {
     }
     getOrder();
 }
+
+document.querySelector('#filter_channal').addEventListener('change', (e) => {
+    channels_id = e.target.value;
+    getOrder();
+})
 
 getOrder()

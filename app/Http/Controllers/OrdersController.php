@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\DB;
 class OrdersController extends Controller
 {
     public function index() {
-        return view('orders.index');
+        $data['channel'] = Channel::where('user_id',Auth::id())->get();
+        return view('orders.index',$data);
     }
     public function create() {
         $data['channel'] = Channel::where('user_id',Auth::id())->get();
@@ -56,11 +57,14 @@ class OrdersController extends Controller
     }
 
     public function getOrder(Request $request) {
-    
+        $where = ['orders.user_id'=> Auth::id()];
+        if (isset($request->channels_id) && !empty($request->channels_id)){
+            $where['orders.channel_id'] = $request->channels_id;
+        }
         $orders = Order::select('orders.*',DB::raw('users.name as users'),DB::raw('channels.name as channels'))
             ->leftJoin('users', 'users.id', '=', 'orders.create_user_id')
             ->leftJoin('channels', 'channels.id', '=', 'orders.channel_id')
-            ->where('orders.user_id', Auth::id())
+            ->where($where)
             ->with('Channel')
             ->orderBy($request->sort,$request->sort_i)
             ->get();

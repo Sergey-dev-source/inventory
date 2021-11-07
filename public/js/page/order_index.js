@@ -2340,22 +2340,32 @@ __webpack_require__.r(__webpack_exports__);
 
 var sort = 'id';
 var sort_i = 'ASC';
+var channels_id = '';
 
 var getOrder = function getOrder() {
   var url = "/order/getOrder?sort=".concat(sort, "&sort_i=").concat(sort_i);
+
+  if (channels_id !== '') {
+    url = url + "&channels_id=".concat(channels_id);
+  }
+
   axios__WEBPACK_IMPORTED_MODULE_0___default().get(url).then(function (r) {
-    console.log(r);
     setOrder(r.data);
-  })["catch"](function (error) {// console.log(error)
   });
 };
 
 var setOrder = function setOrder(data) {
   var element = '';
-  data.forEach(function (item) {
-    element += "\n        <tr>\n            <td class=\"border\">\n                ".concat(item.id, "\n            </td>\n            <td class=\"border\">\n                ").concat(item.customer, "\n            </td>\n            <td class=\"border\">\n                ").concat(item.channels, "\n            </td>\n            <td class=\"border\">\n                ").concat(item.users, "\n            </td>\n            <td class=\"border\">\n                \n            </td>\n            <td class=\"border\">\n                action\n            </td>\n        </tr>\n        ");
-    document.querySelector('#order').innerHTML = element;
-  });
+
+  if (data.length > 0) {
+    data.forEach(function (item) {
+      element += "\n        <tr>\n            <td class=\"border\">\n                ".concat(item.id, "\n            </td>\n            <td class=\"border\">\n                ").concat(item.customer, "\n            </td>\n            <td class=\"border\">\n                ").concat(item.channels, "\n            </td>\n            <td class=\"border\">\n                ").concat(item.users, "\n            </td>\n            <td class=\"border\">\n                \n            </td>\n            <td class=\"border\">\n                action\n            </td>\n        </tr>\n        ");
+    });
+  } else {
+    element = "\n        <tr>\n            <td colspan = '6' class=\"border\">\n                nout result \n            </td>\n        </tr>\n        ";
+  }
+
+  document.querySelector('#order').innerHTML = element;
 };
 
 document.querySelectorAll('.ord').forEach(function (item) {
@@ -2377,6 +2387,10 @@ var orderSort = function orderSort(e) {
   getOrder();
 };
 
+document.querySelector('#filter_channal').addEventListener('change', function (e) {
+  channels_id = e.target.value;
+  getOrder();
+});
 getOrder();
 })();
 

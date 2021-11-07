@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/location/edit/{id}', "WarehouseController@edit");
     Route::post('/location/update', "WarehouseController@update")->name('location.update');
     Route::post('/location/change_status', "WarehouseController@change_status");
+    Route::post('/location/delete', "WarehouseController@delete");
     Route::post('/inventory/create', "InventoryController@create")->name('inventory.create');
     Route::get('/inventory/filter', "InventoryController@filter");
     Route::post('/inventory/change_count', "InventoryController@change_count");
@@ -44,4 +45,5 @@ Route::middleware('auth')->group(function (){
     Route::get('/orders/create',"OrdersController@create")->name('orders.create');
     Route::post('/channel/create',"ChannelController@create");
     Route::get('/order/state',"OrdersController@state");
+    Route::post('/order/store', "OrdersController@store")->name('orders.store');
 });

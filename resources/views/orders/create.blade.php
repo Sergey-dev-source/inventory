@@ -23,7 +23,7 @@
             </span>
         </div>
         <div class="content_body">
-            <form action="" method="post" id="order_create">
+            <form action="{{ route('orders.store') }}" method="post" id="order_create">
                 @csrf 
                 <div class="d-flex justify-content-around ">
                     <div class="" style='padding: 0;width: 49%; box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 22%);'>

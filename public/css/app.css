@@ -8,6 +8,10 @@
     text-decoration: none;
 }
 
+a {
+    cursor: pointer;
+}
+
 body {
     position: relative;
     min-height: 100vh;

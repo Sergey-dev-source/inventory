@@ -13,4 +13,7 @@ class Channel extends Model
         'name',
         'description'
     ];
+    public function Order(){
+        return $this->hasMany(Order::class);
+    }
 }

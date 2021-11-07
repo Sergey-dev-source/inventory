@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\UsaStates;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
@@ -52,5 +53,17 @@ class OrdersController extends Controller
             'state_us' => $request->state,
             'phone' => $request->phone
         ]);
+    }
+
+    public function getOrder(Request $request) {
+    
+        $orders = Order::select('orders.*',DB::raw('users.name as users'),DB::raw('channels.name as channels'))
+            ->leftJoin('users', 'users.id', '=', 'orders.create_user_id')
+            ->leftJoin('channels', 'channels.id', '=', 'orders.channel_id')
+            ->where('orders.user_id', Auth::id())
+            ->with('Channel')
+            ->orderBy($request->sort,$request->sort_i)
+            ->get();
+        return response()->json($orders);
     }
 }

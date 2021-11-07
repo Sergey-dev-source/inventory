@@ -27,4 +27,8 @@ class Order extends Model
         'state_us',
         'phone'
     ];
+
+    public function  Channel () {
+        return $this->belongsTo( Channel::class);
+    }
 }

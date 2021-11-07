@@ -17,7 +17,19 @@
         </span>
     </div>
     <div class="content_body">
-        
+        <table id="order_table">
+            <thead>
+                <thead>
+                    <th>
+                        Order:
+                    </th>
+                    <th>
+                        Custommer
+                    </th>
+                    
+                </thead>
+            </thead>
+        </table>
     </div>
 </div>
 @endsection

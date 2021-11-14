@@ -2368,6 +2368,23 @@ var setLocation = function setLocation(data) {
   });
   document.getElementById('orderline_location').innerHTML = element;
 };
+
+document.getElementById('orders_line_save').addEventListener('click', function () {
+  var id = document.getElementById('order_id').value;
+  var product = document.getElementById('orderline_product').value;
+  var location = document.getElementById('orderline_location').value;
+  var qty = document.getElementById('orderline_qty').value;
+  var price = document.getElementById('orderline_price').value;
+  var remarks = document.getElementById('orderline_remarks').value;
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/ordersLine/store', {
+    id: id,
+    product: product,
+    location: location,
+    qty: qty,
+    price: price,
+    remarks: remarks
+  }).then(function (response) {});
+});
 })();
 
 /******/ })()

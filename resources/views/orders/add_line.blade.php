@@ -23,7 +23,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <td>    
+                            <input type="hidden" id="order_id" value="{{ $order['id'] }}">
                             <select class="form-control" id="orderline_product">
                                 <option value="">Select product</option>
                             </select>
@@ -43,7 +44,7 @@
                             <input type="text" class="form-control" id="orderline_remarks">
                         </td>
                         <td>
-                            <button type="button" class="btn btn-success">
+                            <button type="button" id="orders_line_save" class="btn btn-success">
                                 <i class='bx bx-plus-medical' ></i>
                             </button>
                         </td>

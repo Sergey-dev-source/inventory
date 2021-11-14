@@ -35,3 +35,24 @@ let setLocation = data => {
     });
     document.getElementById('orderline_location').innerHTML = element;
 }
+
+document.getElementById('orders_line_save').addEventListener('click', () => {
+
+    let id = document.getElementById('order_id').value;
+    let product = document.getElementById('orderline_product').value;
+    let location = document.getElementById('orderline_location').value;
+    let qty = document.getElementById('orderline_qty').value;
+    let price = document.getElementById('orderline_price').value;
+    let remarks = document.getElementById('orderline_remarks').value;
+    axios.post('/ordersLine/store', {
+            id: id,
+            product: product,
+            location: location,
+            qty: qty,
+            price: price,
+            remarks: remarks
+        })
+        .then((response) => {
+
+        })
+})

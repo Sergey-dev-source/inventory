@@ -50,4 +50,5 @@ Route::middleware('auth')->group(function (){
     Route::get('/order/detail/{id}','OrdersController@details');
     Route::get('/ordersline/getproduct','OrdersController@getproduct');
     Route::get('/ordersline/getlocation/{id}','OrdersController@getlocation');
+    Route::post('/ordersLine/store',"OrdersLineController@store");
 });

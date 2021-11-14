@@ -16,7 +16,7 @@
             </a>
         </span>
     </div>
-    <div class="content_body" style="padding: 5px">
+    <div class="content_body" style="padding: 0 15px 10px 15px">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3">

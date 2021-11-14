@@ -38,7 +38,21 @@ let setOrder = data => {
                 
             </td>
             <td class="border">
-                action
+                <div class='more' style="margin: auto"> 
+                    <div class='p_ic'>
+                        <i class='bx bx-dots-horizontal-rounded'></i>
+                    </div>
+                    <div class='p_abs' >
+                        <ul>
+                            <li >
+                                <a href='/order/detail/${item.id}' >
+                                    <i class='bx bx-search-alt'></i>
+                                    Details
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </td>
         </tr>
         `

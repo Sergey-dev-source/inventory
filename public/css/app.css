@@ -877,3 +877,61 @@ body {
 .state {
     display: none;
 }
+
+.orders_line_abs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .33);
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.orders_line_rel {
+    width: 70%;
+    margin: 40px auto;
+    background-color: rgb(251, 249, 249);
+    box-shadow: 0 8px 18px rgb(0 0 0 / 18%), 0 6px 6px rgb(0 0 0 / 23%);
+}
+
+.orders_line_title {
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid #1d1b31;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.orders_line_close {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.5 ease;
+}
+
+.orders_line_close:hover {
+    box-shadow: 0 8px 18px rgb(0 0 0 / 18%), 0 6px 6px rgb(0 0 0 / 23%);
+}
+
+.orders_line_body {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+.orderLineTotal {
+    width: 30%;
+    padding: 10px;
+    background-color: #eee;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 18%);
+    margin-left: 70%;
+}
+
+.orderLineSave {
+    width: 318px;
+    margin: 45px 0 12px 1443px;
+}

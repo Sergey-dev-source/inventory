@@ -2331,50 +2331,67 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!************************************!*\
-  !*** ./resources/js/page/order.js ***!
-  \************************************/
+/*!******************************************!*\
+  !*** ./resources/js/page/order_index.js ***!
+  \******************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-var save_channel = document.getElementById('save_channel');
-save_channel.addEventListener('click', function () {
-  var name = document.getElementById('chanal_name').value;
-  var description = document.getElementById('chanal_description').value;
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/channel/create', {
-    name: name,
-    description: description
-  }).then(function (response) {
-    if (response.data.error != undefined && response.data.error != '') {
-      alert(response.data.error);
-    } else {
-      document.getElementById('channel').innerHTML += "<option value=\"".concat(response.data.id, "\" selected>").concat(response.data.name, "</option>");
-      document.querySelector('.modal-backdrop').remove();
-      document.querySelector('.modal').remove();
-    }
-  });
-});
-$(function () {
-  $('#countries').on('change', function () {
-    var val = $(this).find(":selected").val();
-    $('#state').children().remove();
+var sort = 'id';
+var sort_i = 'ASC';
+var channels_id = '';
 
-    if (val === '1') {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/order/state').then(function (response) {
-        $('#state').append('<option value="">Select State (US Only):</option>');
-        response.data.forEach(function (element) {
-          $('#state').append("<option value=\"".concat(element.id, "\">").concat(element.name, "</option>"));
-        });
-      });
-      $('.province').hide();
-      $('.state').show();
-    } else {
-      $('.province').show();
-      $('.state').hide();
-    }
+var getOrder = function getOrder() {
+  var url = "/order/getOrder?sort=".concat(sort, "&sort_i=").concat(sort_i);
+
+  if (channels_id !== '') {
+    url = url + "&channels_id=".concat(channels_id);
+  }
+
+  axios__WEBPACK_IMPORTED_MODULE_0___default().get(url).then(function (r) {
+    setOrder(r.data);
+  });
+};
+
+var setOrder = function setOrder(data) {
+  var element = '';
+
+  if (data.length > 0) {
+    data.forEach(function (item) {
+      element += "\n        <tr>\n            <td class=\"border\">\n                ".concat(item.id, "\n            </td>\n            <td class=\"border\">\n                ").concat(item.customer, "\n            </td>\n            <td class=\"border\">\n                ").concat(item.channels, "\n            </td>\n            <td class=\"border\">\n                ").concat(item.users, "\n            </td>\n            <td class=\"border\">\n                \n            </td>\n            <td class=\"border\">\n                <div class='more' style=\"margin: auto\"> \n                    <div class='p_ic'>\n                        <i class='bx bx-dots-horizontal-rounded'></i>\n                    </div>\n                    <div class='p_abs' >\n                        <ul>\n                            <li >\n                                <a href='/order/detail/").concat(item.id, "' >\n                                    <i class='bx bx-search-alt'></i>\n                                    Details\n                                </a>\n                            </li>\n                        </ul>\n                    </div>\n                </div>\n            </td>\n        </tr>\n        ");
+    });
+  } else {
+    element = "\n        <tr>\n            <td colspan = '6' class=\"border\">\n                nout result \n            </td>\n        </tr>\n        ";
+  }
+
+  document.querySelector('#order').innerHTML = element;
+};
+
+document.querySelectorAll('.ord').forEach(function (item) {
+  var sort = item.getAttribute('data-sort');
+  item.addEventListener('click', function () {
+    return orderSort(sort);
   });
 });
+
+var orderSort = function orderSort(e) {
+  sort = e;
+
+  if (sort_i == 'ASC') {
+    sort_i = 'DESC';
+  } else {
+    sort_i = 'ASC';
+  }
+
+  getOrder();
+};
+
+document.querySelector('#filter_channal').addEventListener('change', function (e) {
+  channels_id = e.target.value;
+  getOrder();
+});
+getOrder();
 })();
 
 /******/ })()

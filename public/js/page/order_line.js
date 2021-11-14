@@ -2331,50 +2331,43 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!************************************!*\
-  !*** ./resources/js/page/order.js ***!
-  \************************************/
+/*!*****************************************!*\
+  !*** ./resources/js/page/order_line.js ***!
+  \*****************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-var save_channel = document.getElementById('save_channel');
-save_channel.addEventListener('click', function () {
-  var name = document.getElementById('chanal_name').value;
-  var description = document.getElementById('chanal_description').value;
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/channel/create', {
-    name: name,
-    description: description
-  }).then(function (response) {
-    if (response.data.error != undefined && response.data.error != '') {
-      alert(response.data.error);
-    } else {
-      document.getElementById('channel').innerHTML += "<option value=\"".concat(response.data.id, "\" selected>").concat(response.data.name, "</option>");
-      document.querySelector('.modal-backdrop').remove();
-      document.querySelector('.modal').remove();
-    }
-  });
-});
-$(function () {
-  $('#countries').on('change', function () {
-    var val = $(this).find(":selected").val();
-    $('#state').children().remove();
+get_product();
 
-    if (val === '1') {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/order/state').then(function (response) {
-        $('#state').append('<option value="">Select State (US Only):</option>');
-        response.data.forEach(function (element) {
-          $('#state').append("<option value=\"".concat(element.id, "\">").concat(element.name, "</option>"));
-        });
-      });
-      $('.province').hide();
-      $('.state').show();
-    } else {
-      $('.province').show();
-      $('.state').hide();
-    }
+function get_product() {
+  axios__WEBPACK_IMPORTED_MODULE_0___default().get('/ordersline/getproduct').then(function (response) {
+    set_product(response.data);
+  });
+}
+
+var set_product = function set_product(data) {
+  var element = '';
+  data.forEach(function (item) {
+    element += "\n            <option value='".concat(item.product.id, "' ").concat(item.count === 0 ? 'disabled' : '', ">").concat(item.product.name, "</option>\n        ");
+  });
+  document.getElementById('orderline_product').innerHTML += element;
+};
+
+document.getElementById('orderline_product').addEventListener('change', function (e) {
+  var id = e.target.value;
+  axios__WEBPACK_IMPORTED_MODULE_0___default().get("/ordersline/getlocation/".concat(id)).then(function (response) {
+    setLocation(response.data);
   });
 });
+
+var setLocation = function setLocation(data) {
+  var element = '<option value="">Select location</option>';
+  data.forEach(function (item) {
+    element += "\n            <option value='".concat(item.warehouse.id, "' >").concat(item.warehouse.name, "</option>\n        ");
+  });
+  document.getElementById('orderline_location').innerHTML = element;
+};
 })();
 
 /******/ })()

@@ -42,6 +42,7 @@
 @section('scripts')
 
 
+
     <script src="{{ asset('js/page/product_index.js') }}"></script>
     {{--    <script  src="../../js/app.js" ></script>--}}
 @endsection

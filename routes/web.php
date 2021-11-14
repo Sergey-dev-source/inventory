@@ -46,4 +46,8 @@ Route::middleware('auth')->group(function (){
     Route::post('/channel/create',"ChannelController@create");
     Route::get('/order/state',"OrdersController@state");
     Route::post('/order/store', "OrdersController@store")->name('orders.store');
+    Route::get('/order/getOrder',"OrdersController@getOrder");
+    Route::get('/order/detail/{id}','OrdersController@details');
+    Route::get('/ordersline/getproduct','OrdersController@getproduct');
+    Route::get('/ordersline/getlocation/{id}','OrdersController@getlocation');
 });

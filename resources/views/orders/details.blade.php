@@ -150,7 +150,7 @@
                                         <td>{{ $item['price'] }}</td>
                                         <td>{{ $item['total'] }}</td>
                                         <td>{{ $item['commet'] }}</td>
-                                        <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                        <td><button type="button" data-id="{{ $item['id'] }}" class="btn btn-danger delete_order">Delete</button></td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -168,11 +168,12 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('js/page/order_line.js') }}"></script> 
     <script>
-        let check = '{{ $status_orderline }}';
+        let checks = '{{ $status_orderline }}';
         
         $(function (){
-            if(check === 'order'){
+            if(checks === 'order'){
                 
                 setTimeout(() => {
                     $('.orders_line_abs').show()    

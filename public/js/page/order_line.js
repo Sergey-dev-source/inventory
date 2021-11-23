@@ -2439,6 +2439,18 @@ document.querySelectorAll('.orders_line_save').forEach(function (item) {
     });
   });
 });
+document.querySelectorAll('.delete_order').forEach(function (item) {
+  item.addEventListener('click', function (e) {
+    var id = e.target.getAttribute('data-id');
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/ordersLine/destroy', {
+      id: id
+    }).then(function (response) {
+      if (response.data.action === 'success') {
+        window.location.reload();
+      }
+    });
+  });
+});
 })();
 
 /******/ })()

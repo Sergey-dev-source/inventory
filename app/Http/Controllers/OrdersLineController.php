@@ -52,4 +52,11 @@ class OrdersLineController extends Controller
     
         return response()->json($data);
     }
+
+    public function destroy(Request $request) {
+        $orderline = OrdersLine::where(['id'=>$request->id,'user_id' => Auth::id()])->delete();
+        if ($orderline){
+            return response()->json(['action'=>'success']);
+        }
+    }
 }

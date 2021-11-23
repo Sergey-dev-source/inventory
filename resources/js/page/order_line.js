@@ -125,3 +125,15 @@ document.querySelectorAll('.orders_line_save').forEach(item => {
             })
     })
 })
+
+document.querySelectorAll('.delete_order').forEach(item => {
+    item.addEventListener('click', e => {
+        let id = e.target.getAttribute('data-id')
+        axios.post('/ordersLine/destroy', { id: id })
+            .then((response) => {
+                if (response.data.action === 'success') {
+                    window.location.reload()
+                }
+            })
+    })
+})

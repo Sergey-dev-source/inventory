@@ -2369,21 +2369,73 @@ var setLocation = function setLocation(data) {
   document.getElementById('orderline_location').innerHTML = element;
 };
 
-document.getElementById('orders_line_save').addEventListener('click', function () {
-  var id = document.getElementById('order_id').value;
-  var product = document.getElementById('orderline_product').value;
-  var location = document.getElementById('orderline_location').value;
-  var qty = document.getElementById('orderline_qty').value;
-  var price = document.getElementById('orderline_price').value;
-  var remarks = document.getElementById('orderline_remarks').value;
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/ordersLine/store', {
-    id: id,
-    product: product,
-    location: location,
-    qty: qty,
-    price: price,
-    remarks: remarks
-  }).then(function (response) {});
+var id = document.getElementById('order_id').value;
+document.querySelectorAll('.orders_line_save').forEach(function (item) {
+  item.addEventListener('click', function (e) {
+    var user_id = document.getElementById('order_user').value;
+    var product = document.getElementById('orderline_product').value;
+    var location = document.getElementById('orderline_location').value;
+    var qty = document.getElementById('orderline_qty').value;
+    var price = document.getElementById('orderline_price').value;
+    var remarks = document.getElementById('orderline_remarks').value;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/ordersLine/store', {
+      id: id,
+      user_id: user_id,
+      product: product,
+      location: location,
+      qty: qty,
+      price: price,
+      remarks: remarks
+    }, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
+      if (response.data.action === 'error') {
+        document.getElementById('orderline_product_error').innerHTML = '';
+        document.getElementById('orderline_location_error').innerHTML = '';
+        document.getElementById('orderline_qty_error').innerHTML = '';
+        document.getElementById('orderline_price_error').innerHTML = '';
+        var error = response.data.msg;
+
+        if (error.product !== undefined) {
+          document.getElementById('orderline_product_error').innerHTML = "<div class='bg-danger text-white p-1'>".concat(error.product[0], "</div>");
+        }
+
+        if (error.location !== undefined) {
+          document.getElementById('orderline_location_error').innerHTML = "<div class='bg-danger text-white p-1'>".concat(error.location[0], "</div>");
+        }
+
+        if (error.qty.length !== undefined) {
+          document.getElementById('orderline_qty_error').innerHTML = "<div class='bg-danger text-white p-1'>".concat(error.qty[0], "</div>");
+        }
+
+        if (error.price.length !== undefined) {
+          document.getElementById('orderline_price_error').innerHTML = "<div class='bg-danger text-white p-1'>".concat(error.price[0], "</div>");
+        }
+      } else if (response.data.action === 'success') {
+        document.getElementById('orderline_product').value = '';
+        document.getElementById('orderline_location').value = '';
+        document.getElementById('orderline_qty').value = '';
+        document.getElementById('orderline_price').value = '';
+        document.getElementById('orderline_remarks').value = '';
+        var ordersLine = response.data.msg;
+        var element = "\n                        <tr>\n                            <td>".concat(ordersLine.product, "</td>\n                            <td>").concat(ordersLine.location, "</td>\n                            <td>").concat(ordersLine.count, "</td>\n                            <td>").concat(ordersLine.price, "</td>\n                            <td>").concat(ordersLine.commet !== null ? ordersLine.commet : '', "</td>\n                        </tr>\n                    ");
+        document.getElementById('result').innerHTML += element;
+        var element_order = "\n                        <tr>\n                            <td> ".concat(ordersLine.product, "</td>\n                            <td> ").concat(ordersLine.location, "</td>\n                            <td>").concat(ordersLine.count, "</td>\n                            <td>").concat(ordersLine.price, "</td>\n                            <td>").concat(ordersLine.total, "</td>\n                            <td>").concat(ordersLine.commet !== null ? ordersLine.commet : '', "</td>\n                            <td><button type=\"button\" class=\"btn btn-danger\">Delete</button></td>\n                        </tr>\n                    ");
+        document.getElementById('order_tbody').innerHTML += element_order;
+        var tot = document.getElementById('tot').innerText;
+        var sum = Number(tot) + ordersLine.total;
+        document.getElementById('tot').innerText = sum;
+      }
+
+      if (e.target.getAttribute('data-types') !== null) {
+        document.querySelector('.orders_line_abs').style.display = 'none';
+      }
+    })["catch"](function (error) {// console.log(error.response.data);
+    });
+  });
 });
 })();
 

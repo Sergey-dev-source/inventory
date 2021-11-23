@@ -926,9 +926,11 @@ body {
 .orderLineTotal {
     width: 30%;
     padding: 10px;
+    display: flex;
     background-color: #eee;
     box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 18%);
     margin-left: 70%;
+    justify-content: space-around;
 }
 
 .orderLineSave {

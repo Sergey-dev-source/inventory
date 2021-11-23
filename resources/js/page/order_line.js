@@ -60,11 +60,12 @@ document.querySelectorAll('.orders_line_save').forEach(item => {
                 }
             })
             .then((response) => {
+                document.getElementById('orderline_product_error').innerHTML = '';
+                document.getElementById('orderline_location_error').innerHTML = '';
+                document.getElementById('orderline_qty_error').innerHTML = '';
+                document.getElementById('orderline_price_error').innerHTML = '';
                 if (response.data.action === 'error') {
-                    document.getElementById('orderline_product_error').innerHTML = '';
-                    document.getElementById('orderline_location_error').innerHTML = '';
-                    document.getElementById('orderline_qty_error').innerHTML = '';
-                    document.getElementById('orderline_price_error').innerHTML = '';
+
                     let error = response.data.msg;
                     if (error.product !== undefined) {
                         document.getElementById('orderline_product_error').innerHTML = `<div class='bg-danger text-white p-1'>${error.product[0]}</div>`;
@@ -84,6 +85,7 @@ document.querySelectorAll('.orders_line_save').forEach(item => {
                     document.getElementById('orderline_qty').value = '';
                     document.getElementById('orderline_price').value = '';
                     document.getElementById('orderline_remarks').value = '';
+
                     let ordersLine = response.data.msg;
 
                     let element = `
@@ -111,10 +113,12 @@ document.querySelectorAll('.orders_line_save').forEach(item => {
                     let tot = document.getElementById('tot').innerText;
                     let sum = Number(tot) + ordersLine.total;
                     document.getElementById('tot').innerText = sum;
+                    if (e.target.getAttribute('data-types') !== null) {
+                        document.querySelector('.orders_line_abs').style.display = 'none';
+                        document.getElementById('result').innerHTML = '';
+                    }
                 }
-                if (e.target.getAttribute('data-types') !== null) {
-                    document.querySelector('.orders_line_abs').style.display = 'none';
-                }
+
             })
             .catch(error => {
                 // console.log(error.response.data);

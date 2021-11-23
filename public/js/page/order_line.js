@@ -2392,11 +2392,12 @@ document.querySelectorAll('.orders_line_save').forEach(function (item) {
         'Content-Type': 'application/json'
       }
     }).then(function (response) {
+      document.getElementById('orderline_product_error').innerHTML = '';
+      document.getElementById('orderline_location_error').innerHTML = '';
+      document.getElementById('orderline_qty_error').innerHTML = '';
+      document.getElementById('orderline_price_error').innerHTML = '';
+
       if (response.data.action === 'error') {
-        document.getElementById('orderline_product_error').innerHTML = '';
-        document.getElementById('orderline_location_error').innerHTML = '';
-        document.getElementById('orderline_qty_error').innerHTML = '';
-        document.getElementById('orderline_price_error').innerHTML = '';
         var error = response.data.msg;
 
         if (error.product !== undefined) {
@@ -2428,10 +2429,11 @@ document.querySelectorAll('.orders_line_save').forEach(function (item) {
         var tot = document.getElementById('tot').innerText;
         var sum = Number(tot) + ordersLine.total;
         document.getElementById('tot').innerText = sum;
-      }
 
-      if (e.target.getAttribute('data-types') !== null) {
-        document.querySelector('.orders_line_abs').style.display = 'none';
+        if (e.target.getAttribute('data-types') !== null) {
+          document.querySelector('.orders_line_abs').style.display = 'none';
+          document.getElementById('result').innerHTML = '';
+        }
       }
     })["catch"](function (error) {// console.log(error.response.data);
     });

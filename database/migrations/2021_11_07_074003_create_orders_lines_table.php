@@ -15,6 +15,7 @@ class CreateOrdersLinesTable extends Migration
     {
         Schema::create('orders_lines', function (Blueprint $table) {
             $table->id();
+            $table->integer('order_id');
             $table->integer('user_id');
             $table->integer('dcop_user_id');
             $table->integer('product_id');
@@ -22,7 +23,7 @@ class CreateOrdersLinesTable extends Migration
             $table->integer('count');
             $table->integer('price');
             $table->integer('total');
-            $table->string('commet');
+            $table->string('commet')->nullable();
             $table->timestamps();
         });
     }

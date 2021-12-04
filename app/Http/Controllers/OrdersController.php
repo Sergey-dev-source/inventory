@@ -7,6 +7,7 @@ use App\Models\Countries;
 use App\Models\currency;
 use App\Models\Inventory;
 use App\Models\Order;
+use App\Models\OrdersLine;
 use App\Models\UsaStates;
 use DateTime;
 use Illuminate\Http\Request;
@@ -88,6 +89,7 @@ class OrdersController extends Controller
         $ord = Order::select(
             'orders.*',
             DB::raw('users.name as users'),
+            DB::raw('channels.user_id as channels_user'),
             DB::raw('channels.name as channels'),
             DB::raw('countries.name as country'),
             DB::raw('usa_states.name as usa_states'))
@@ -108,6 +110,24 @@ class OrdersController extends Controller
         }else {
             $data['requestedDate'] = '';
         }
+        $orderLine = OrdersLine::select(
+                'orders_lines.*',
+                DB::raw('products.name as product'),
+                DB::raw('warehouses.name as location'),
+                DB::raw('users.name as users'),
+            )
+            ->leftJoin('users', 'users.id', '=', 'orders_lines.dcop_user_id')
+            ->leftJoin('products', 'products.id', '=', 'orders_lines.product_id')
+            ->leftJoin('warehouses', 'warehouses.id', '=', 'orders_lines.warehouse_id')
+            ->where(['orders_lines.order_id'=>$request->id,'orders_lines.user_id'=>Auth::id()])
+            ->get();
+        
+        $totals = 0;
+        foreach($orderLine as $item){
+            $totals+= $item['total'];
+        }
+        $data['orderLine'] = $orderLine;
+        $data['totals'] = $totals;
         
         return view('orders.details',$data);
     } 

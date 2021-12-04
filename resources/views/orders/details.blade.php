@@ -129,6 +129,34 @@
                     </span>
                     <button type="button" id="addLine" class="btn btn-success ">Add line</button>
                 </div>
+                <div class="w-100">
+                    <table class="table">
+                        <thead>
+                            <th>Product</th>
+                            <th>Location</th>
+                            <th>Qty</th>
+                            <th>Price ({{ $curency['symbol'] }})</th>
+                            <th>Total</th>
+                            <th>Remarks</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody id="order_tbody">
+                            @if (!empty($orderLine))
+                                @foreach ($orderLine as $item)
+                                    <tr>
+                                        <td>{{ $item['product'] }}</td>
+                                        <td>{{ $item['location'] }}</td>
+                                        <td>{{ $item['count'] }}</td>
+                                        <td>{{ $item['price'] }}</td>
+                                        <td>{{ $item['total'] }}</td>
+                                        <td>{{ $item['commet'] }}</td>
+                                        <td><button type="button" data-id="{{ $item['id'] }}" class="btn btn-danger delete_order">Delete</button></td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -140,11 +168,12 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('js/page/order_line.js') }}"></script> 
     <script>
-        let check = '{{ $status_orderline }}';
+        let checks = '{{ $status_orderline }}';
         
         $(function (){
-            if(check === 'order'){
+            if(checks === 'order'){
                 
                 setTimeout(() => {
                     $('.orders_line_abs').show()    

@@ -11,7 +11,6 @@
 <body>
 <div class="container">
     <div class="icon">
-        <img src="{{ asset('images/icons.png') }}" alt="">
     </div>
     <div class="row">
         <div class="form">

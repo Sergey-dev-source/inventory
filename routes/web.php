@@ -10,6 +10,9 @@ Route::middleware('CheckLogin')->group(function (){
     Route::post('/register',"UsersController@register_form")->name('register_form');
 });
 Route::middleware('auth')->group(function (){
+
+    Route::middleware('CheckRole')->group(function (){
+        Route::get('/admin/dashboard', "admin\DashboardController@index")->name('admin.dashboard');
+    });
     Route::get('/logout','UsersController@logout')->name('logout');
-    Route::get('/admin/dashboard', "admin\DashboardController@index")->name('admin.dashboard');
 });

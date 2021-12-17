@@ -18,7 +18,11 @@ class UsersController extends Controller
     public function login(Request $request){
         $user = $request->only(['email','password']);
         if (Auth::attempt($user)){
-            return redirect(route('dashboard'));
+            if (Auth::user()->role_id === 1)  {
+                return redirect(route('admin.dashboard'));
+            }else{
+                return redirect('/');
+            }
         }else{
             return redirect()->back()->withErrors('Email or password not found');
         }

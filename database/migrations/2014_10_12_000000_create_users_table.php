@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('company');
-            $table->integer('role_id')->nullable();
+            $table->integer('role_id')->default(2);
             $table->integer('time_zone_id')->nullable();
             $table->boolean('paid')->default(false);
             $table->string('email')->unique();

@@ -13,6 +13,7 @@ Route::middleware('auth')->group(function (){
 
     Route::middleware('CheckRole')->group(function (){
         Route::get('/admin/dashboard', "admin\DashboardController@index")->name('admin.dashboard');
+        Route::get('admin/section',"SectionController@index")->name('admin.section');
     });
     Route::get('/logout','UsersController@logout')->name('logout');
 });

@@ -42,7 +42,8 @@
                 </li>
             </ul>
         </div>
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-around">
+            <h6 style="margin-right: 15px">{{ Auth::user()->name }}</h6>
             <a class="text-reset me-3" href="#">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
@@ -51,19 +52,12 @@
 </nav>
 <div class="menu">
     <ul class="list-group mt-5">
-        <li class="list-group-item" onclick="document.querySelector('.dropMenu').classList.toggle('d-none');" style="display: flex;align-items: center">
-            <img src="{{ asset('images/catalog.webp') }}" width="30" style="margin-right: 10px" alt="">
-            catalog
-            <i class="fas fa-caret-right" style="margin-left: 105px;font-size: 20px"></i>
-            <div class="list-group dropMenu d-none">
-                <a href="{{ route('admin.section') }}"  class="list-group-item" >
-                    Section
-                </a>
-                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item">Morbi leo risus</a>
-                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item">Vestibulum at eros</a>
-            </div>
+        <li class="list-group-item" style="display: flex;align-items: center">
+            <a href="{{ route('admin.section') }}" class="nav-link">
+                <img src="{{ asset('images/catalog.webp') }}" width="30" style="margin-right: 10px" alt="">
+                Catalog
+            </a>
+
         </li>
         <li  class="list-group-item">Dapibus ac facilisis in</li>
         <li class="list-group-item">Morbi leo risus</li>

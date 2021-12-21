@@ -17,7 +17,8 @@
                     <a href="#" class="nav-item nav-link" data-bs-toggle="modal" data-bs-target="#register">Register</a>
                 @endguest
                 @auth
-                        <a href="{{ route('logout') }}" class="nav-item nav-link">Logout</a>
+                    <h5>{{ Auth::user()->name }}</h5>
+                     <a href="{{ route('logout') }}" class="nav-item nav-link">Logout</a>
                 @endauth
 
             </div>

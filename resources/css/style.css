@@ -1,14 +1,14 @@
 .menu {
     position: fixed;
-    width: 10%;
+    width: 15%;
     background: #e7e7e7;
     height: 100%;
     top: 58px;
 }
 
 .content {
-    width: 90%;
-    margin-left: 10%;
+    width: 85%;
+    margin-left: 15%;
 }
 .list-group-item {
     cursor: pointer;

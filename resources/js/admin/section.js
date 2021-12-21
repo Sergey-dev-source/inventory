@@ -24,8 +24,10 @@ class Section extends Component {
 
     lock() {
         axios.post('/admin/catalog/lock' , {})
-            .then(() => {
-
+            .then((response) => {
+                if (response.data){
+                    this.state.setEditedshow();
+                }
             })
             .catch(err => {
                 console.log(err)

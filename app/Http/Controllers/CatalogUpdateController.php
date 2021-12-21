@@ -22,7 +22,6 @@ class CatalogUpdateController extends Controller
             'updated' => Carbon::now(),
         ]);
         $data['status'] = true;
-        $data['count'] = $editedCount;
         return response()->json($data);
 
     }

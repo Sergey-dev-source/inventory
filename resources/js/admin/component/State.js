@@ -14,5 +14,7 @@ export default  class State extends Component{
         this.refs.edit.classList.add('d-none');
         this.refs.save.classList.remove('d-none');
         this.refs.cancel.classList.remove('d-none');
+        this.refs.addSection.classList.remove('d-none');
+        this.refs.addCategory.classList.remove('d-none');
     }
 }

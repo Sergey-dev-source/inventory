@@ -15,10 +15,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container-fluid mt-3">
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-md-6" id="section">
                 <div class="w-100 bg-info p-2">
                     <div class="row">

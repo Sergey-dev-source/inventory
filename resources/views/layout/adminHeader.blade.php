@@ -44,7 +44,7 @@
         </div>
         <div class="d-flex align-items-around">
             <h6 style="margin-right: 15px">{{ Auth::user()->name }}</h6>
-            <a class="text-reset me-3" href="#">
+            <a class="text-reset me-3" href="{{ route('logout') }}">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         </div>

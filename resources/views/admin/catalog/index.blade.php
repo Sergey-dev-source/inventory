@@ -45,7 +45,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/admin/section.js') }}"></script>
+    <script src="{{ asset('js/admin/Catalog.js') }}"></script>
 @endsection
 
 

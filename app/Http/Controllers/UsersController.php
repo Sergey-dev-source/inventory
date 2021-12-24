@@ -31,9 +31,12 @@ class UsersController extends Controller
     }
 
     public function register_form(RegisterRequest $request){
+
        $user =  User::create($request->all());
        if ($user){
-           return redirect()->back()->withSuccess('account created successfully');
+           $data['status'] = true;
+           $data['message'] = 'account created successfully';
+           return response()->json($data);
        }
     }
 

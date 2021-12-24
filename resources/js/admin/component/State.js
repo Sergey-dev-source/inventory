@@ -1,4 +1,4 @@
-import Component from "./Component";
+import Component from "../../component/Component";
 export default  class State extends Component{
     constructor(placeholderId, props ) {
         super(placeholderId,props);
@@ -18,3 +18,4 @@ export default  class State extends Component{
         this.refs.addCategory.classList.remove('d-none');
     }
 }
+

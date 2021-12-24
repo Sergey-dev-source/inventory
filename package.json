@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "datatables.net": "^1.11.3",
-        "popper.js": "^1.12.9"
+        "popper.js": "^1.12.9",
+        "toastr": "^2.1.4"
     }
 }

@@ -1,8 +1,8 @@
-import Component from "./component/Component";
+import Component from "../component/Component";
 import State from "./component/State";
 import axios from "axios";
 
-class Section extends Component {
+class Catalog extends Component {
     constructor() {
         super('catalog');
         this.state = {}
@@ -34,7 +34,7 @@ class Section extends Component {
             })
     }
     autoUnlock() {
-        axios.post('/admin/catalog/unlock' , {})
+        axios.post('/admin/catalog/autoUnlock' , {})
             .then(() => {
 
             })
@@ -44,5 +44,5 @@ class Section extends Component {
     }
 }
 
-new Section('hello');
+new Catalog('hello');
 

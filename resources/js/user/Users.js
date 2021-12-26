@@ -14,6 +14,9 @@ class Users extends Component {
             events: {
                 saveRegister: ({detail}) =>{
                     this.register(detail)
+                },
+                saveLogin: ({detail}) => {
+                    this.login(detail)
                 }
             }
         })
@@ -28,6 +31,25 @@ class Users extends Component {
             .catch(error=>{
                 toastr.error(error.response.data.message)
             })
+    }
+    login(data){
+        axios.post('/login',data)
+            .then(response => {
+                this.logins(response.data)
+            })
+    }
+
+    logins(user){
+        console.log(user)
+        if (user.checkUser === false){
+            toastr.error(user.message);
+        }else{
+            if (user.check === false){
+                toastr.success(user.message);
+            }else {
+                window.location.replace('/admin/dashboard')
+            }
+        }
     }
 }
 new Users;

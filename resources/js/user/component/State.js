@@ -23,8 +23,8 @@ export  class State extends component {
         new Autorize('login',{
             data: {},
             events: {
-                saveRegister: ({detail}) =>{
-                    // this.registerData(detail)
+                saveLogin: ({detail}) =>{
+                    this.loginData(detail)
                 }
             }
         })
@@ -32,5 +32,8 @@ export  class State extends component {
 
     registerData(detail) {
         this.triggerEvent('saveRegister', detail);
+    }
+    loginData(detail) {
+        this.triggerEvent('saveLogin', detail);
     }
 }

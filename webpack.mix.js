@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/admin/Catalog.js', 'public/js/admin')
+    .js('resources/js/admin/Section.js', 'public/js/admin')
     .js('resources/js/user/Users.js', 'public/js/user')
     .postCss('resources/css/app.css', 'public/css', [
         //

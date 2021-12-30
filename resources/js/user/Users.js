@@ -7,7 +7,6 @@ class Users extends Component {
         this.state = {};
         this.init();
     }
-
     init(){
         this.state = new State('menu',{
             data: {},
@@ -32,20 +31,21 @@ class Users extends Component {
                 toastr.error(error.response.data.message)
             })
     }
+
     login(data){
         axios.post('/login',data)
             .then(response => {
                 this.logins(response.data)
             })
     }
-
     logins(user){
         console.log(user)
         if (user.checkUser === false){
             toastr.error(user.message);
         }else{
-            if (user.check === false){
+            if (user.redirect === false){
                 toastr.success(user.message);
+                window.location.reload();
             }else {
                 window.location.replace('/admin/dashboard')
             }

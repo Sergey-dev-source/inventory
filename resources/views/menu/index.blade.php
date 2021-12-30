@@ -13,12 +13,12 @@
             </div>
             <div class="navbar-nav ms-auto">
                 @guest()
-                    <a href="#" class="nav-item nav-link" ref="logins">Login</a>
-                    <a href="#" class="nav-item nav-link" ref="registers">Register</a>
+                    <span class="nav-item nav-link" ref="logins">Login</span>
+                    <span class="nav-item nav-link" ref="registers">Register</span>
                 @endguest
                 @auth
                     <h5>{{ Auth::user()->name }}</h5>
-                     <a href="{{ route('logout') }}" class="nav-item nav-link">Logout</a>
+                     <a href="{{ route('logout') }}" ref="logout" class="nav-item nav-link">Logout</a>
                 @endauth
 
             </div>

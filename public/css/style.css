@@ -1,7 +1,6 @@
 .menu {
     position: fixed;
     width: 15%;
-    background: #e7e7e7;
     height: 100%;
     top: 58px;
 }
@@ -26,5 +25,9 @@
 .save {
     margin-right: 10px;
     display: block;
+}
+
+.nav-link {
+    cursor: pointer
 }
 

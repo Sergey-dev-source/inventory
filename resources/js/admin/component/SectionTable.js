@@ -2,48 +2,53 @@ import Component from "../../component/Component";
 export default class SectionTable extends Component {
     constructor(plackeholderId,props) {
         super(plackeholderId,props);
+        this.table = {}
         this.initTable()
+        this.initSearch()
+    }
+    initSearch(){
+        this.refs.searchSection.addEventListener('keyup',()=>{
+            let text = this.refs.searchSection.value
+            this.triggerEvent('search', {name: text})
+        })
     }
     initTable() {
-        console.log(this.refs)
-        $(this.refs.sectionTable).KTDatatable({
-            data: {
-                type: 'local',
-                source: this.data.format,
-                pageSize: 10
-            },
-            layout: {
-                scroll: true,
-                height: 500,
-                footer: false
-            },
-            sortable: false,
-            pagination: true,
-            columns: this.data.column,
-            rows: {
-                callback: (row, data) => {
-                    if (data.highlighted) {
-                        row.addClass(this.data.sumRowClass)
-                    }
-                },
-                afterTemplate: (row, data) => {
-                    if (data.clickable) {
-                        row.on('click', () => {
-                            this.persistRowClick(data.index)
-                        })
-                    }
+        let table = this.refs.sectionTable;
 
-                    if (data.actions) {
-                        row.find('[data-action]').each((index, button) => {
-                            button.addEventListener('click', () => {
-                                this[button.dataset.action](parseInt(button.dataset.index))
-                            })
-                        })
-                    }
-
-                    row.find('[data-toggle="kt-tooltip"]').tooltip()
-                }
-            }
+        let column = '<tr>';
+        this.data.column.forEach(item=> {
+            column+= `<th>${item.data}</th>`
         })
+        column+= '</tr>';
+        let data = '';
+            this.data.format.forEach(item=> {
+            data+= `<tr>
+                        <td>${item.name}</td>
+                        <td>${item.active}</td>
+                        <td>${item.actions}</td>
+                    </tr>`
+        })
+        if (this.data.format.length === 0){
+            data = `<tr>
+                        <td colspan="3" style="text-align: center">Not data</td>
+                    </tr>`
+        }
+        table.innerHTML = `<thead>${column}</thead><tbody>${data}</tbody>`
+        this.initBuild()
+    }
+
+    initBuild(){
+        let items = document.querySelectorAll('[ref="edit"]')
+        items.forEach(button =>{
+            button.addEventListener('click',()=>{
+                let id = button.getAttribute('data-index');
+                this.triggerEvent('edit',id)
+            })
+        })
+
+    }
+    reload(data) {
+        this.data.format = data
+        this.initTable();
     }
 }

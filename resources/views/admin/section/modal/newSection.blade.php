@@ -7,6 +7,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group mb-2">
+                    <input type="hidden" ref="sectionId">
                     <label for="email">Name</label>
                     <input type="text" ref="name" class="form-control" >
                 </div>
@@ -16,6 +17,9 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" ref="deleteSection" class="btn btn-danger d-none">
+                    delete
+                </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" ref="saveSection" class="btn btn-primary">
                     Save

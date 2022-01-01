@@ -15,6 +15,9 @@ Route::middleware('auth')->group(function (){
         Route::get('/admin/dashboard', "admin\DashboardController@index")->name('admin.dashboard');
         Route::get('/admin/section',"SectionController@index")->name('admin.section');
         Route::post('/section/store',"SectionController@store");
+        Route::post('/section/edit',"SectionController@edit");
+        Route::post('/section/delete',"SectionController@delete");
+        Route::post('/section/search',"SectionController@search");
         Route::get('/section/show',"SectionController@show");
     });
     Route::get('/logout','UsersController@logout')->name('logout');

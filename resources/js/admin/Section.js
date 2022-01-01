@@ -12,19 +12,13 @@ class Section extends Component {
         this.sectionTable = {}
         this.columnFormat = [
             {
-                field: 'name',
-                title: 'Name',
-                width: 100
+                'data': 'Name',
             },
             {
-                field: 'active',
-                title: 'Active',
-                width: 100
+                'data': 'Active',
             },
             {
-                field: 'action',
-                title: 'Action',
-                width: 100
+                'data': 'Action',
             }
         ];
         this.formattedData = [];
@@ -37,8 +31,8 @@ class Section extends Component {
         axios.get('/section/show',{})
             .then(response => {
                 this.data = response.data;
-                this.formatData();
                 this.init();
+                this.formatData();
             })
     }
     init() {
@@ -56,6 +50,12 @@ class Section extends Component {
             events: {
                 new: ({detail}) => {
                     this.persistData('new', detail)
+                },
+                edit: ({detail})=>{
+                    this.persistData('edit', detail)
+                },
+                delete: ({detail})=>{
+                    this.persistData('delete', detail)
                 }
             }
         });
@@ -63,6 +63,14 @@ class Section extends Component {
             data: {
                 column: this.columnFormat,
                 format: this.formattedData
+            },
+            events: {
+                edit: ({detail}) => {
+                    this.editsSection(detail)
+                },
+                search: ({detail}) => {
+                    this.persistData('search',detail)
+                }
             }
         })
     }
@@ -74,6 +82,12 @@ class Section extends Component {
         let url = '';
         if (check === 'new') {
             url = '/section/store';
+        }else if(check === 'edit'){
+            url = '/section/edit';
+        }else if(check === 'delete'){
+            url = '/section/delete';
+        }else if(check === 'search'){
+            url = '/section/search';
         }
         axios.post(url, data)
             .then(response => {
@@ -81,7 +95,11 @@ class Section extends Component {
                 if (section.status === false) {
                     toastr.error(section.messages)
                 } else {
-                    toastr.success(section.messages)
+                    this.data = response.data.ok;
+                    this.formatData();
+                    if (check !== 'search') {
+                        toastr.success(section.messages);
+                    }
                 }
             })
     }
@@ -92,10 +110,22 @@ class Section extends Component {
             const json = {
                 name: item.name,
                 active: (item.active === 1) ? 'active' : 'deactive',
-                actions: `<button type="button" class="btn btn--dark" data-action="edit" data-index="${index}"><i class="far fa-edit"></i></button>`
+                actions: `<button type="button" ref="edit" class="btn btn-dark" data-action="edit" data-index="${item.id}"><i class="far fa-edit"></i></button>`
             }
             this.formattedData.push(json)
+
         })
+        this.sectionTable.reload(this.formattedData)
+    }
+
+    editsSection(id) {
+        let element;
+        this.data.forEach(item=>{
+            if (item.id === Number(id)){
+                element = item
+            }
+        })
+        this.section.open(true,element)
     }
 }
 

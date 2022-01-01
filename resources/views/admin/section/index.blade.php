@@ -13,8 +13,13 @@
                 </div>
             </div>
         </div>
-        <div class="w-100 bg-dark p-2">
-            <table ref="sectionTable"></table>
+        <div class="w-25 p-2 mt-4">
+            <input type="text" ref="searchSection" class="form-control" placeholder="Search...">
+        </div>
+        <div class="w-100 p-2 mt-4">
+            <table class="table" ref="sectionTable">
+
+            </table>
         </div>
     </div>
     @include('admin.section.modal.newSection')

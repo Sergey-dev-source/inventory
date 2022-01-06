@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Models\currency;
 use App\Models\User;
-use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,15 +15,27 @@ class UsersController extends Controller
 
     public function login(Request $request){
         $user = $request->only(['email','password']);
+
+        $check = false;
+        $message = '';
+        $checkuser = true;
         if (Auth::attempt($user)){
+            $checkUser = true;
             if (Auth::user()->role_id === 1)  {
-                return redirect(route('admin.dashboard'));
+                $check = true;
             }else{
-                return redirect('/');
+                $check = false;
+                $message = "You have logged";
             }
+
         }else{
-            return redirect()->back()->withErrors('Email or password not found');
+            $checkUser = false;
+            $message = 'Email or password not found';
         }
+        $data['checkUser'] = $checkUser;
+        $data['redirect'] = $check;
+        $data['message'] = $message;
+        return response()->json($data);
     }
 
     public function register(){
@@ -33,9 +43,12 @@ class UsersController extends Controller
     }
 
     public function register_form(RegisterRequest $request){
+
        $user =  User::create($request->all());
        if ($user){
-           return redirect()->back()->withSuccess('account created successfully');
+           $data['status'] = true;
+           $data['message'] = 'Account created successfully';
+           return response()->json($data);
        }
     }
 

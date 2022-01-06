@@ -28,7 +28,7 @@ class Section extends Component {
 
     }
     getData() {
-        axios.get('/section/show',{})
+        axios.get('/section/shows',{})
             .then(response => {
                 this.data = response.data;
                 this.init();
@@ -105,17 +105,7 @@ class Section extends Component {
     }
 
     formatData() {
-        this.formattedData = [];
-        this.data.forEach((item,index) => {
-            const json = {
-                name: item.name,
-                active: (item.active === 1) ? 'active' : 'deactive',
-                actions: `<button type="button" ref="edit" class="btn btn-dark" data-action="edit" data-index="${item.id}"><i class="far fa-edit"></i></button>`
-            }
-            this.formattedData.push(json)
-
-        })
-        this.sectionTable.reload(this.formattedData)
+        this.sectionTable.table.ajax.reload()
     }
 
     editsSection(id) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Section;
 use Illuminate\Http\Request;
+use DataTables;
 
 class SectionController extends Controller
 {
@@ -34,9 +35,12 @@ class SectionController extends Controller
 
     public function show() {
         $section = Section::get();
+        return DataTables::of($section)->make(true);
+    }
+    public function shows() {
+        $section = Section::get();
         return response()->json($section);
     }
-
     public function edit(Request $request){
         $sectionCoant = Section::where('name',$request->name)->where('id','!=',(int)$request->id)->get();
         if (empty($request->name)) {

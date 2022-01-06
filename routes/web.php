@@ -17,8 +17,11 @@ Route::middleware('auth')->group(function (){
         Route::post('/section/store',"SectionController@store");
         Route::post('/section/edit',"SectionController@edit");
         Route::post('/section/delete',"SectionController@delete");
-        Route::post('/section/search',"SectionController@search");
         Route::get('/section/show',"SectionController@show");
+        Route::get('/section/shows',"SectionController@shows");
+        Route::get('/admin/category',"CategoryController@index")->name('admin.category');
+        Route::get('/admin/getsection',"CategoryController@getsection");
+        Route::post('/category/story','CategoryController@story');
     });
     Route::get('/logout','UsersController@logout')->name('logout');
 });

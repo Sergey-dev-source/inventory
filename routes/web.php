@@ -22,6 +22,10 @@ Route::middleware('auth')->group(function (){
         Route::get('/admin/category',"CategoryController@index")->name('admin.category');
         Route::get('/admin/getsection',"CategoryController@getsection");
         Route::post('/category/story','CategoryController@story');
+        Route::get('/category/show',"CategoryController@show");
+        Route::get('/category/shows',"CategoryController@shows");
+        Route::post('/category/edit','CategoryController@edit');
+        Route::post('/category/delete','CategoryController@delete');
     });
     Route::get('/logout','UsersController@logout')->name('logout');
 });

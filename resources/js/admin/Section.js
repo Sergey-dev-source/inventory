@@ -8,24 +8,10 @@ class Section extends Component {
     constructor() {
         super('section');
         this.state = {};
-        this.section = {}
-        this.sectionTable = {}
-        this.columnFormat = [
-            {
-                'data': 'Name',
-            },
-            {
-                'data': 'Active',
-            },
-            {
-                'data': 'Action',
-            }
-        ];
-        this.formattedData = [];
+        this.section = {};
+        this.sectionTable = {};
         this.data = {};
-
         this.getData();
-
     }
     getData() {
         axios.get('/section/shows',{})
@@ -60,10 +46,7 @@ class Section extends Component {
             }
         });
         this.sectionTable = new SectionTable('section', {
-            data: {
-                column: this.columnFormat,
-                format: this.formattedData
-            },
+            data: {},
             events: {
                 edit: ({detail}) => {
                     this.editsSection(detail)

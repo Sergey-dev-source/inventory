@@ -38,6 +38,11 @@ Route::middleware('auth')->group(function (){
 //        slide bar
 
         Route::get('/admin/sliders','SlidebarController@index')->name('admin.slidebar');
+        Route::post('/sliders/store','SlidebarController@store');
+        Route::get('/sliders/show','SlidebarController@show');
+        Route::get('/sliders/shows','SlidebarController@shows');
+        Route::post('/sliders/edit','SlidebarController@edit');
+        Route::post('/sliders/delete','SlidebarController@delete');
 
     });
     Route::get('/logout','UsersController@logout')->name('logout');

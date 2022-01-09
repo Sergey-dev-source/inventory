@@ -2,14 +2,24 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Section</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New slider image</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="form-group mb-2">
-                    <input type="hidden" ref="sectionId">
-                    <label for="email">Name</label>
-                    <input type="text" ref="name" class="form-control" >
+                <div class="form-group mb-2 mt-2">
+                    <input type="hidden" ref="sliderId">
+                    <label for="name">Image</label>
+                    <input type="file" id="name" ref="img" class="form-control mt-2" >
+                    <div ref="editImageResult"></div>
+                </div>
+                <div class="form-group mb-2 mt-2">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" ref="title" class="form-control mt-2" >
+                </div>
+
+                <div class="form-group mb-2 mt-2">
+                    <label for="desc">Description</label>
+                    <textarea id="desc" ref="desc" class="form-control mt-2" rows="6" cols="6"></textarea>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" ref="active" class="form-check-input" id="check1" name="option1" value="something" checked>
@@ -17,11 +27,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" ref="deleteSection" class="btn btn-danger d-none">
+                <button type="button" ref="deleteSlider" class="btn btn-danger d-none">
                     delete
                 </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" ref="saveSection" class="btn btn-primary">
+                <button type="button" ref="saveSlider" class="btn btn-primary">
                     Save
                 </button>
             </div>

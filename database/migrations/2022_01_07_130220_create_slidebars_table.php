@@ -15,7 +15,7 @@ class CreateSlidebarsTable extends Migration
     {
         Schema::create('slidebars', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('image');
             $table->string('title');
             $table->string('description')->nullable();
             $table->boolean('active')->default(true);

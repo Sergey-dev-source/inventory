@@ -14,7 +14,7 @@ class SlidebarController extends Controller
     }
     public function store(Request $request)
     {
-        $imageName = time().'.'.$request->image->extension();
+        $imageName = time().'.'.$request->image->getClientOriginalName();
         $request->image->move(public_path('images/sliders'), $imageName);
         $sliders = new Slidebar();
         $sliders->image = $imageName;
@@ -42,13 +42,15 @@ class SlidebarController extends Controller
 
     public function edit(Request $request) {
         $slider = Slidebar::where('id',$request->id)->first();
-        $afterImage = public_path('images/sliders/'.$slider['image']);
-        if (File::exists($afterImage)){
-            File::delete($afterImage);
+        if ($slider['image'] !== $request->image->getClientOriginalName()) {
+            $afterImage = public_path('images/sliders/'.$slider['image']);
+            if (File::exists($afterImage)){
+                File::delete($afterImage);
+            }
+            $imageName = time().'.'.$request->image->getClientOriginalName();
+            $request->image->move(public_path('images/sliders'), $imageName);
+            $slider->image = $imageName;
         }
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images/sliders'), $imageName);
-        $slider->image = $imageName;
         $slider->title = $request->title;
         $slider->description = $request->description;
         $slider->active = $request->active;

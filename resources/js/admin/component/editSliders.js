@@ -76,8 +76,12 @@ export default class editSliders extends Component {
         } else{
             this.refs.deleteSlider.classList.add('d-none')
         }
-        this.refs.editImageResult.innerHTML = (check === true) ? `<img width="80" src="/images/sliders/${data.image}">` : '';
-        this.refs.title.value = (check === true) ? data.title : '';
+        let image = data.image;
+        let list = new DataTransfer();
+        let img = new File(['content'],image)
+        list.items.add(img);
+        this.refs.img.files = list.files
+       this.refs.title.value = (check === true) ? data.title : '';
         this.refs.desc.value = (check === true) ? data.description : '';
         this.refs.sliderId.value = (check === true) ? data.id : '';
         this.refs.active.checked = (check === true) ? (data.active === 1) ? true : false  : true

@@ -10,7 +10,6 @@
                     <input type="hidden" ref="sliderId">
                     <label for="name">Image</label>
                     <input type="file" id="name" ref="img" class="form-control mt-2" >
-                    <div ref="editImageResult"></div>
                 </div>
                 <div class="form-group mb-2 mt-2">
                     <label for="title">Title</label>

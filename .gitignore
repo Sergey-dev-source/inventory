@@ -5,7 +5,7 @@
 /public/images/sliders
 /storage/*.key
 /vendor
-.env
+backend/.env
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml

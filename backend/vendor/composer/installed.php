@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6cd2d7ed70f60f56aa110b43fb60a2a774f693c6',
+        'reference' => '292f73ee1747004965801926640ad3b65fc5db2c',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -454,7 +454,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6cd2d7ed70f60f56aa110b43fb60a2a774f693c6',
+            'reference' => '292f73ee1747004965801926640ad3b65fc5db2c',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -1436,14 +1436,12 @@
             'dev_requirement' => false,
         ),
         'tymon/jwt-auth' => array(
-            'pretty_version' => 'dev-develop',
-            'version' => 'dev-develop',
+            'pretty_version' => '1.0.2',
+            'version' => '1.0.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../tymon/jwt-auth',
-            'aliases' => array(
-                0 => '1.0.x-dev',
-            ),
-            'reference' => 'ab00f2d7cce5f043067aef7849cdc792de2df635',
+            'aliases' => array(),
+            'reference' => 'e588cb719539366c0e2f6017f975379cb73e9680',
             'dev_requirement' => false,
         ),
         'vlucas/phpdotenv' => array(

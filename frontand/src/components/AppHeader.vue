@@ -10,7 +10,7 @@
               <ul>
                 <li>Register</li>
                 <li>
-                  <a href="/login">login</a>
+                  <router-link :to="{name: 'login'}">login</router-link>
                 </li>
               </ul>
             </div>

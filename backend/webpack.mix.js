@@ -12,13 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/admin/Section.js', 'public/js/admin')
-    .js('resources/js/user/Users.js', 'public/js/user')
-    .js('resources/js/admin/Category.js', 'public/js/admin')
-    .js('resources/js/admin/Sliders.js', 'public/js/admin')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
-mix.postCss('resources/css/style.css', 'public/css', [
-
-]);

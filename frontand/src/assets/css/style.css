@@ -1,10 +1,11 @@
-*{
+* {
     margin: 0;
     padding: 0;
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
 }
+
 :root {
     --typeHeaderPrimary: Ubuntu;
     --typeHeaderFallback: sans-serif;
@@ -70,8 +71,84 @@
     --colorBrandViolet: #B9B6FF;
     --grid-gutter: 17px;
 }
-body{
+
+body {
     font-family: var(--typeHeaderFallback);
+    background-color: var(--colorBtnPrimaryDim);
 }
 
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
 
+.menu_row {
+    position: relative;
+    margin: auto;
+    padding: 40px 50px;
+    width: calc(1600px - 94px - 94px);
+    max-width: calc(100vw - 94px - 94px);
+    background-color: rgba(255, 255, 255, .9);
+    backdrop-filter: none;
+    border-radius: 0 0 30px 30px;
+}
+
+.menu_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu_content {
+    display: flex;
+}
+
+.menu_content_box {
+    margin-right: 50px;
+}
+
+.menu_content_box ul {
+    display: flex;
+}
+
+.menu_content_box ul li {
+    margin-right: 2em;
+}
+
+.menu_content_box ul li a {
+    color: var(--colorDrawerText);
+    font-size: 20px;
+}
+
+.tab_category {
+    position: absolute;
+    width: 100%;
+    background: rgba(255, 255, 255, .9);
+    top: 100%;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    border-radius: 0 0 30px 30px;
+}
+
+.tab_category_ol {
+    margin: 10px 20px;
+    border-right: 1px solid var(--colorDrawerBorder);
+}
+
+.tab_category_ol:last-child {
+    border-right: none;
+}
+
+.tab_category_head {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.tab_category_body {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
